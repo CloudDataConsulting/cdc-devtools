@@ -1,0 +1,182 @@
+# CDC Global Git Ignore
+# Common files to ignore across all repositories
+
+# ============================================================================
+# Operating System Files
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ============================================================================
+# Editor and IDE Files
+# ============================================================================
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# IntelliJ IDEA / PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*.swn
+*.vim
+.netrwhist
+Session.vim
+
+# Emacs
+*~
+\#*\#
+.\#*
+.emacs.desktop
+.emacs.desktop.lock
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================================
+# Development Tools
+# ============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+.env
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Docker
+.dockerignore
+
+# ============================================================================
+# Security and Credentials
+# ============================================================================
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.template
+
+# AWS
+.aws/credentials
+.aws/config
+
+# SSH
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.pem
+*.key
+
+# Certificates
+*.crt
+*.csr
+*.p12
+
+# ============================================================================
+# CDC Specific
+# ============================================================================
+
+# Local settings
+.claude/settings.local.json
+settings.local.json
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+logs/
+
+# Backup files
+*.backup
+*.bak
+*.orig
+
+# CDC DevTools
+.cdc-project.conf.local
+*.local.conf
+
+# Personal configurations (should not be in repos)
+.cdc_personal_*
+.bpruss_*
+
+# ============================================================================
+# Project Specific (add to local .gitignore)
+# ============================================================================
+
+# This section is intentionally left empty
+# Add project-specific ignores to the repository's .gitignore

@@ -1,0 +1,164 @@
+# CDC Developer Zsh Configuration Template
+# Copy relevant sections to your ~/.zshrc
+
+# ============================================================================
+# Prezto Configuration (if using Prezto)
+# ============================================================================
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# ============================================================================
+# CDC Developer Configuration
+# ============================================================================
+export CDC_WORKSPACE="${CDC_WORKSPACE:-$HOME/repos/cdc}"
+export CDC_CONFIG_DIR="$HOME/.cdc"
+export CDC_DEVTOOLS_PATH="$CDC_WORKSPACE/cdc-devtools"
+
+# Source CDC configurations if they exist
+[[ -f "$CDC_CONFIG_DIR/aliases.sh" ]] && source "$CDC_CONFIG_DIR/aliases.sh"
+[[ -f "$CDC_CONFIG_DIR/functions.sh" ]] && source "$CDC_CONFIG_DIR/functions.sh"
+
+# Source personal configurations if they exist
+[[ -f "$HOME/.cdc_personal" ]] && source "$HOME/.cdc_personal"
+[[ -f "$HOME/.cdc_clients" ]] && source "$HOME/.cdc_clients"
+[[ -f "$HOME/.cdc_env" ]] && source "$HOME/.cdc_env"
+
+# ============================================================================
+# Environment Variables
+# ============================================================================
+
+# Editor
+export EDITOR='code'
+export VISUAL='code'
+
+# Language settings
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+# History
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=50000
+export SAVEHIST=50000
+
+# ============================================================================
+# Zsh Options
+# ============================================================================
+
+# History options
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format
+setopt INC_APPEND_HISTORY        # Write to the history file immediately
+setopt SHARE_HISTORY             # Share history between all sessions
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file
+setopt HIST_VERIFY               # Do not execute immediately upon history expansion
+
+# Directory options
+setopt AUTO_CD                   # Auto cd into directory by name
+setopt AUTO_PUSHD               # Push the current directory visited on the stack
+setopt PUSHD_IGNORE_DUPS        # Do not store duplicates in the stack
+setopt PUSHD_SILENT             # Do not print the directory stack after pushd or popd
+
+# Completion options
+setopt COMPLETE_IN_WORD         # Complete from both ends of a word
+setopt ALWAYS_TO_END            # Move cursor to the end of a completed word
+setopt PATH_DIRS                # Perform path search even on command names with slashes
+setopt AUTO_MENU                # Show completion menu on a successive tab press
+setopt AUTO_LIST                # Automatically list choices on ambiguous completion
+setopt AUTO_PARAM_SLASH         # If completed parameter is a directory, add a trailing slash
+setopt EXTENDED_GLOB            # Use extended globbing syntax
+
+# ============================================================================
+# Key Bindings
+# ============================================================================
+
+# Use emacs key bindings
+bindkey -e
+
+# Enable history search
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+
+# [PageUp] - Up a line of history
+bindkey "${terminfo[kpp]}" up-line-or-history
+# [PageDown] - Down a line of history
+bindkey "${terminfo[knp]}" down-line-or-history
+
+# Start typing + [Up-Arrow] - fuzzy find history forward
+bindkey "${terminfo[kcuu1]}" history-substring-search-up
+# Start typing + [Down-Arrow] - fuzzy find history backward
+bindkey "${terminfo[kcud1]}" history-substring-search-down
+
+# ============================================================================
+# Completions
+# ============================================================================
+
+# Initialize completions
+autoload -Uz compinit
+compinit
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+# Colored completion
+zstyle ':completion:*' list-colors ''
+
+# ============================================================================
+# Prompt (if not using a theme)
+# ============================================================================
+
+# Simple prompt with git info
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
+# zstyle ':vcs_info:git:*' formats '%F{yellow}(%b)%f'
+# PROMPT='%F{blue}%~%f ${vcs_info_msg_0_} %# '
+
+# ============================================================================
+# Tool Integrations
+# ============================================================================
+
+# Homebrew
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f "/usr/local/bin/brew" ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# PyEnv
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
+# 1Password CLI
+if command -v op 1>/dev/null 2>&1; then
+    # eval "$(op completion zsh)"
+    # compdef _op op
+fi
+
+# AWS CLI completion
+if command -v aws_completer 1>/dev/null 2>&1; then
+    complete -C aws_completer aws
+fi
+
+# Terraform completion
+if command -v terraform 1>/dev/null 2>&1; then
+    complete -o nospace -C terraform terraform
+fi
+
+# ============================================================================
+# Local Configuration
+# ============================================================================
+
+# Source local zsh configuration if it exists
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

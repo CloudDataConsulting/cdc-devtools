@@ -12,6 +12,10 @@ CDC DevTools provides a comprehensive set of tools and utilities to standardize 
 # Clone the repository
 git clone https://github.com/CloudDataConsulting/cdc-devtools.git ~/repos/cdc/cdc-devtools
 
+# Install CDC developer configurations
+cd ~/repos/cdc/cdc-devtools/developer-config
+./install.sh
+
 # Run the onboarding script
 cd ~/repos/cdc/cdc-devtools
 ./team-setup/onboard_developer.sh -n "Your Name" -e "your.email@clouddataconsulting.com"
@@ -49,6 +53,12 @@ cdc-create-session myproject ~/repos/cdc/myproject
 - Tool installation verification
 - Environment setup
 
+### 🔧 Developer Configuration
+- Standardized shell aliases and functions
+- Git configuration templates
+- Tmux productivity settings
+- Personal customization support
+
 ## Directory Structure
 
 ```
@@ -57,6 +67,7 @@ cdc-devtools/
 ├── ai-agents/            # AI agent components
 ├── monitoring/           # Monitoring and alerting
 ├── team-setup/          # Onboarding and config
+├── developer-config/    # Shell configs and dotfiles
 └── bin/                 # Executable shortcuts
 ```
 
@@ -147,6 +158,17 @@ class MyAgent(GitAwareAgent):
         self.complete_task("Task Done", "Description")
         # Automatically commits and pushes!
 ```
+
+## Developer Configuration
+
+CDC DevTools includes optional shell configurations to standardize common developer tasks:
+
+- **Git aliases**: `g`, `gs`, `gf`, `gl` for faster git operations
+- **Terraform shortcuts**: `tf`, `tfi`, `tfp` for infrastructure work
+- **AWS utilities**: Profile management and authentication helpers
+- **Project navigation**: Quick access to CDC projects
+
+See [developer-config/README.md](developer-config/README.md) for installation and customization.
 
 ## Contributing
 
