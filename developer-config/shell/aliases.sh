@@ -5,9 +5,9 @@
 # ============================================================================
 # Environment & Navigation
 # ============================================================================
-# Quick environment loading
-alias e='. ./env.sh'
-alias et='./env_test.sh'
+# Config management (replaces old env.sh pattern)
+alias cdc-config='cat config.yaml'
+alias cdc-secrets='cdc-devtools secrets'
 
 # CDC workspace navigation
 alias cdc='cd ${CDC_WORKSPACE:-$HOME/repos/cdc}'

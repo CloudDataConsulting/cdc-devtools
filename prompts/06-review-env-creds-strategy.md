@@ -301,6 +301,95 @@ fi
 - Remove the `alias e='. ./env.sh'` from shell configs
 - Add deprecation notice if env.sh files are found
 
+### 8. Tmux Integration
+
+Create `tmux-orchestration/core/tmux_secrets_integration.sh`:
+
+```bash
+#!/bin/bash
+# Integration between tmux sessions and secrets management
+
+# Each tmux window can have its own secrets context
+create_window_with_config() {
+    local window_name=$1
+    local config_path=$2
+
+    tmux new-window -n "$window_name"
+
+    # Set window-specific environment to point to config
+    tmux send-keys -t "$window_name" "export CDC_CONFIG_PATH='$config_path'" C-m
+
+    # Show which config is active
+    tmux send-keys -t "$window_name" "echo '📋 Using config: $config_path'" C-m
+}
+
+# Example: Different configs per window
+setup_multi_account_session() {
+    # Production window - uses prod config
+    create_window_with_config "prod-deploy" "./configs/prod-config.yaml"
+
+    # Terraform window - uses infra config
+    create_window_with_config "terraform" "./configs/infra-config.yaml"
+
+    # Data pipeline window - uses data config
+    create_window_with_config "data-etl" "./configs/data-config.yaml"
+}
+```
+
+Create `secrets-management/tmux_aware_secrets.py`:
+
+```python
+"""Tmux-aware secrets management."""
+import os
+from .base_secrets_manager import CDCSecretsManager
+
+
+class TmuxAwareSecretsManager(CDCSecretsManager):
+    """Secrets manager that respects tmux window contexts."""
+
+    def __init__(self, config_path: str = None):
+        # Check if running in tmux window with specific config
+        if config_path is None:
+            config_path = os.environ.get('CDC_CONFIG_PATH', 'config.yaml')
+
+        # Show which config is being used
+        if 'TMUX_PANE' in os.environ:
+            pane = os.environ.get('TMUX_PANE', '')
+            print(f"🔐 Tmux pane {pane} using config: {config_path}")
+
+        super().__init__(config_path)
+
+    @classmethod
+    def for_current_window(cls):
+        """Create manager for current tmux window's config."""
+        return cls()
+```
+
+#### Usage Example in tmux-orchestration/templates/ai-agent-project/
+
+```yaml
+# .cdc-project.conf
+project_name: "multi-cloud-etl"
+secrets_configs:
+  orchestrator: "./configs/orchestrator-config.yaml"
+  aws_worker: "./configs/aws-config.yaml"
+  gcp_worker: "./configs/gcp-config.yaml"
+  azure_worker: "./configs/azure-config.yaml"
+
+windows:
+  - name: "orchestrator"
+    config: "orchestrator"
+    startup: "python orchestrator.py"
+  - name: "aws-etl"
+    config: "aws_worker"
+    startup: "python aws_etl_worker.py"
+  - name: "gcp-etl"
+    config: "gcp_worker"
+    startup: "python gcp_etl_worker.py"
+```
+
+This allows each tmux window to work with completely different cloud accounts/credentials without any conflicts!
+
 ## Summary
 
 This new approach solves the multi-account problem by:
@@ -308,5 +397,6 @@ This new approach solves the multi-account problem by:
 2. Making it explicit which secrets each tool/script uses
 3. Supporting simultaneous multi-account operations
 4. Keeping secrets out of the shell environment
+5. **Enabling tmux windows with isolated secret contexts**
 
-The config.yaml becomes the single source of truth for what secrets a project needs, while keeping the actual secret values in 1Password.
+The config.yaml becomes the single source of truth for what secrets a project needs, while keeping the actual secret values in 1Password. With tmux integration, each window can work with different accounts/credentials simultaneously without any confusion about "which environment am I in?"

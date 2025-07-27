@@ -270,6 +270,24 @@ install_tmux_configs() {
     fi
 }
 
+check_for_env_files() {
+    print_header "Checking for Legacy env.sh Files"
+    
+    local env_files=$(find "$HOME" -name "env.sh" -type f 2>/dev/null | grep -E "(repos|projects|work)" | head -10)
+    
+    if [[ -n "$env_files" ]]; then
+        print_warning "Found legacy env.sh files that should be migrated to config.yaml:"
+        echo "$env_files" | while read -r file; do
+            echo "  - $file"
+        done
+        echo
+        print_info "See $CDC_WORKSPACE/cdc-devtools/docs/SECRETS_MANAGEMENT.md for migration guide"
+        print_info "The new approach eliminates environment variable conflicts and supports multi-account workflows"
+    else
+        print_success "No legacy env.sh files found in common locations"
+    fi
+}
+
 setup_cdc_workspace() {
     print_header "Setting Up CDC Workspace"
     
@@ -403,6 +421,9 @@ main() {
     [[ "$INSTALL_SHELL" == "true" ]] && install_shell_configs
     [[ "$INSTALL_GIT" == "true" ]] && install_git_configs
     [[ "$INSTALL_TMUX" == "true" ]] && install_tmux_configs
+    
+    # Check for old env.sh pattern
+    check_for_env_files
     
     print_header "Installation Complete!"
     

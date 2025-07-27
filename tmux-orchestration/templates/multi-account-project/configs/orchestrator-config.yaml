@@ -1,0 +1,45 @@
+# Orchestrator Configuration
+# Has read access to all environments, write access to none
+
+project:
+  name: "multi-cloud-etl-orchestrator"
+  role: "orchestrator"
+  
+secrets:
+  # Read-only access to monitor all environments
+  aws_profiles:
+    monitor:
+      vault: "CDC_Orchestrator"
+      item: "AWS-Monitor-ReadOnly"
+      region: "us-east-1"
+      
+  # Orchestrator database for job tracking
+  databases:
+    orchestrator_db:
+      vault: "CDC_Orchestrator"
+      item: "Orchestrator-PostgreSQL"
+      host: "orchestrator.internal"
+      port: 5432
+      database: "orchestrator"
+      fields:
+        - username
+        - password
+        
+  # API keys for notifications
+  api_keys:
+    slack:
+      vault: "CDC_Notifications"
+      item: "Slack-Orchestrator"
+      field: "webhook_url"
+      
+    pagerduty:
+      vault: "CDC_Notifications"
+      item: "PagerDuty-API"
+      field: "api_key"
+
+monitoring:
+  dashboards:
+    - name: "ETL Pipeline Status"
+      refresh_interval: "30s"
+    - name: "Cross-Cloud Metrics"
+      refresh_interval: "60s"

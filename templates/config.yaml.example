@@ -1,0 +1,166 @@
+# CDC Project Configuration
+# This file defines project settings and secret references (not the secrets themselves)
+
+project:
+  name: "my-client-project"
+  type: "data-pipeline"
+  client: "ClientName"
+  environment: "development"  # development, staging, production
+
+# Secrets configuration - defines what secrets this project needs
+# Actual secret values are stored in 1Password
+secrets:
+  # AWS Profiles - No environment variables, pulled on demand
+  aws_profiles:
+    # Production account access
+    prod:
+      vault: "ClientName_Production"
+      item: "AWS-Production-Access"
+      region: "us-east-1"
+      access_key_field: "access_key"     # Field name in 1Password
+      secret_key_field: "secret_key"     # Field name in 1Password
+      # Optional: For assumed roles
+      # role_arn: "arn:aws:iam::123456789012:role/DataPipelineRole"
+
+    # Terraform state backend (separate account)
+    terraform_backend:
+      vault: "CDC_Infrastructure"
+      item: "Terraform-State-Backend"
+      region: "us-east-1"
+      access_key_field: "access_key"
+      secret_key_field: "secret_key"
+
+    # Data source account (read-only)
+    data_source:
+      vault: "ClientName_DataLake"
+      item: "AWS-DataLake-ReadOnly"
+      region: "us-west-2"
+      access_key_field: "access_key"
+      secret_key_field: "secret_key"
+
+  # Database connections
+  databases:
+    # Snowflake production
+    snowflake_prod:
+      vault: "ClientName_Production"
+      item: "Snowflake-Production"
+      fields:  # Multiple fields from same 1Password item
+        - account
+        - username
+        - password
+        - warehouse
+        - database
+        - role
+
+    # PostgreSQL analytics
+    postgres_analytics:
+      vault: "ClientName_Analytics"
+      item: "PostgreSQL-Analytics"
+      host: "analytics.client.com"
+      port: 5432
+      database: "analytics"
+      fields:
+        - username
+        - password
+
+  # API Keys
+  api_keys:
+    # GitHub for CI/CD
+    github:
+      vault: "CDC_Development"
+      item: "GitHub-API-Token"
+      field: "token"
+
+    # OpenAI for AI agents
+    openai:
+      vault: "CDC_AI_Services"
+      item: "OpenAI-API"
+      field: "api_key"
+
+    # Slack for notifications
+    slack:
+      vault: "ClientName_Notifications"
+      item: "Slack-Webhook"
+      field: "webhook_url"
+
+  # Service accounts
+  service_accounts:
+    # GCP service account for BigQuery
+    gcp_bigquery:
+      vault: "ClientName_GCP"
+      item: "BigQuery-Service-Account"
+      field: "json_key"  # Returns full JSON key
+
+# Tool configurations (non-secret)
+tools:
+  terraform:
+    version: "1.5.0"
+    backend_profile: "terraform_backend"  # References aws_profiles above
+    workspaces:
+      - dev
+      - staging
+      - prod
+
+  dbt:
+    version: "1.7.0"
+    target_database: "snowflake_prod"  # References databases above
+    profiles:
+      dev:
+        threads: 4
+        target_warehouse: "DEV_WH"
+      prod:
+        threads: 8
+        target_warehouse: "PROD_WH"
+
+  python:
+    version: "3.11"
+    virtual_env: ".venv"
+    requirements:
+      - "requirements.txt"
+      - "requirements-dev.txt"
+
+# Monitoring and alerting
+monitoring:
+  slack_channel: "#client-alerts"
+  alert_email: "alerts@clouddataconsulting.com"
+  
+  health_checks:
+    - name: "Data Pipeline"
+      interval: "5m"
+      timeout: "30s"
+    
+    - name: "API Endpoint"
+      interval: "1m"
+      timeout: "10s"
+
+# Tmux window configurations (for multi-account workflows)
+tmux_windows:
+  - name: "orchestrator"
+    working_dir: "./orchestrator"
+    startup_command: "python main.py"
+    
+  - name: "terraform"
+    working_dir: "./infrastructure"
+    aws_profile: "terraform_backend"  # Use specific AWS profile
+    startup_command: "terraform workspace select dev"
+    
+  - name: "data-etl"
+    working_dir: "./etl"
+    aws_profile: "data_source"  # Different AWS profile
+    startup_command: "python etl_runner.py"
+    
+  - name: "monitoring"
+    working_dir: "./monitoring"
+    startup_command: "python monitor.py"
+
+# Project-specific settings
+settings:
+  log_level: "INFO"
+  data_retention_days: 90
+  backup_enabled: true
+  
+  # Feature flags
+  features:
+    auto_scaling: true
+    cost_optimization: true
+    enhanced_monitoring: false

@@ -1,0 +1,45 @@
+# AWS ETL Worker Configuration
+# Full access to AWS production data pipeline resources
+
+project:
+  name: "multi-cloud-etl-aws"
+  role: "aws-etl-worker"
+  cloud: "aws"
+
+secrets:
+  aws_profiles:
+    # Production data pipeline access
+    data_pipeline:
+      vault: "ClientName_AWS_Production"
+      item: "AWS-DataPipeline-Full"
+      region: "us-east-1"
+      role_arn: "arn:aws:iam::123456789012:role/DataPipelineRole"
+      
+    # S3 data lake access
+    data_lake:
+      vault: "ClientName_AWS_DataLake"
+      item: "AWS-S3-DataLake"
+      region: "us-east-1"
+      
+  # Redshift for analytics
+  databases:
+    redshift_analytics:
+      vault: "ClientName_AWS_Analytics"
+      item: "Redshift-Cluster"
+      host: "analytics.123456789012.us-east-1.redshift.amazonaws.com"
+      port: 5439
+      database: "analytics"
+      fields:
+        - username
+        - password
+
+etl:
+  source_buckets:
+    - "s3://raw-data-landing/"
+    - "s3://external-feeds/"
+  
+  destination_bucket: "s3://processed-data/"
+  
+  temp_bucket: "s3://etl-temp/"
+  
+  error_bucket: "s3://etl-errors/"
