@@ -1,0 +1,39 @@
+# Git automation strategy for CDC AI Agents
+git_automation:
+  # Global settings
+  auto_commit: true
+  auto_push: true
+  default_branch_prefix: "ai"
+
+  # When to commit automatically
+  commit_triggers:
+    - files_changed: 5  # After 5 files modified
+    - lines_changed: 500  # After 500 lines changed
+    - time_elapsed: 1800  # After 30 minutes
+    - task_completed: true  # After each task
+    - test_passed: true  # After tests pass
+    - error_resolved: true  # After fixing an error
+
+  # Commit message templates
+  message_templates:
+    feature: "[{agent}] Add {feature_name}"
+    bugfix: "[{agent}] Fix {issue_description}"
+    refactor: "[{agent}] Refactor {component}"
+    test: "[{agent}] Add tests for {component}"
+    docs: "[{agent}] Update documentation for {component}"
+    checkpoint: "[{agent}] Checkpoint: {description}"
+
+  # Branch naming strategies
+  branch_strategies:
+    orchestrator:
+      pattern: "ai/orchestration/{date}-{task}"
+      auto_create: true
+    feature_agent:
+      pattern: "ai/feature/{feature_name}"
+      auto_create: true
+    bugfix_agent:
+      pattern: "ai/fix/{issue_id}"
+      auto_create: true
+    exploration:
+      pattern: "ai/explore/{description}"
+      auto_create: true

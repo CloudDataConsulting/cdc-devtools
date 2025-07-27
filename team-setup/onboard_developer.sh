@@ -227,6 +227,11 @@ setup_git_config() {
     git config --global alias.st status
     git config --global alias.last 'log -1 HEAD'
     
+    # Add AI-specific git aliases
+    git config --global alias.ai-log "log --grep='Agent:' --pretty=format:'%h %ai %s' --no-merges"
+    git config --global alias.ai-stats "shortlog -sn --grep='Agent:' --no-merges"
+    git config --global alias.ai-recent "log --grep='Agent:' --since='1 week ago' --oneline"
+    
     print_success "Git configuration complete"
 }
 

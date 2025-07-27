@@ -70,6 +70,8 @@ After setup, these commands are available in your PATH:
 - `cdc-onboard` - Onboard a new developer
 - `cdc-import-project` - Import existing project with CDC tools
 - `cdc-summary` - Generate work summary from logs
+- `cdc-analyze-models` - Analyze AI model usage and costs
+- `cdc-git-monitor` - Monitor AI agent git activity
 - `cdc-logs` - View CDC logs
 
 ## Importing Existing Projects
@@ -110,6 +112,40 @@ AGENTS=(
     "data:Data Processing Agent"
     "model:Model Training Agent"
 )
+```
+
+## Automated Git Workflow
+
+AI agents automatically commit and push their work:
+
+- **Auto-commits** after logical checkpoints
+- **Smart branching** for different types of work
+- **Detailed commit messages** with context
+- **Activity monitoring** to track AI contributions
+
+### View AI Commits
+
+```bash
+# See all AI commits
+git ai-log
+
+# See AI commit statistics
+git ai-stats
+
+# Monitor AI git activity
+cdc-git-monitor
+```
+
+### Configuration
+
+Agents inherit from `GitAwareAgent` to get automatic commits:
+
+```python
+class MyAgent(GitAwareAgent):
+    def process_task(self, task):
+        # ... do work ...
+        self.complete_task("Task Done", "Description")
+        # Automatically commits and pushes!
 ```
 
 ## Contributing

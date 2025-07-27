@@ -1,0 +1,18 @@
+#!/bin/bash
+# Add AI agent metadata to commit messages
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+# Only process AI agent commits
+if grep -q "\[ai-" "$COMMIT_MSG_FILE" || grep -q "Agent:" "$COMMIT_MSG_FILE"; then
+    # Add metadata
+    echo "" >> "$COMMIT_MSG_FILE"
+    echo "# AI Commit Metadata" >> "$COMMIT_MSG_FILE"
+    echo "# Generated at: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> "$COMMIT_MSG_FILE"
+    echo "# Working directory: $(pwd)" >> "$COMMIT_MSG_FILE"
+
+    # Add change statistics
+    echo "# Changes:" >> "$COMMIT_MSG_FILE"
+    git diff --cached --stat | sed 's/^/# /' >> "$COMMIT_MSG_FILE"
+fi
