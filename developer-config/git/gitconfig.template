@@ -68,6 +68,11 @@
     
     # Show recent branches
     recent = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+    
+    # Sync multiple branches
+    sync-branches = !git checkout main && git pull && git checkout integration && git pull
+    sync = "!f() { CURRENT=$(git branch --show-current); git checkout main && git pull && git checkout $CURRENT; }; f"
+    sync-all = "!f() { CURRENT=$(git branch --show-current); for branch in main integration development; do if git show-ref --verify --quiet refs/heads/$branch; then git checkout $branch && git pull; fi; done; git checkout $CURRENT; }; f"
 
 [color]
     ui = auto
