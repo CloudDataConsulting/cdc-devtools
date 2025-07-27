@@ -1,5 +1,5 @@
 ---
-name: ai-model-orchestrator
+name: core-orchestrator
 
 description: Use this agent when you need to design, implement, or optimize AI model orchestration systems, particularly for multi-model testing, prompt engineering, and cost optimization. This includes tasks like setting up interfaces for comparing outputs across different LLM providers, implementing prompt methodologies (CRAFT, RISEN, CARE, APE, TRACE, Chain-of-Thought), optimizing token usage and API costs, designing batch processing systems for transcript analysis, or creating quality scoring mechanisms for AI outputs.
 Examples:

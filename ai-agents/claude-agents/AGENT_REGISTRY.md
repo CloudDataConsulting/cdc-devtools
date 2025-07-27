@@ -126,9 +126,9 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
 3. Use `aws-snowflake-devops.md` for deployment
 
 ### For Application Development
-1. Begin with `python-systems-engineer.md` for backend
+1. Begin with `code-systems-engineer.md` for backend
 2. Add `streamlit-data-app-builder.md` for frontend
-3. Include `tech-docs-writer.md` for documentation
+3. Include `doc-technical-writer.md` for documentation
 
 ### For Infrastructure Projects
 1. Use `aws-snowflake-devops.md` for IaC
@@ -136,7 +136,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
 3. Include `security-compliance-engineer.md` for security
 
 ### For AI/ML Projects
-1. Start with `ai-model-orchestrator.md` for coordination
+1. Start with `core-orchestrator.md` for coordination
 2. Add `snowflake-rag-architect.md` for RAG systems
 3. Use specialized agents as needed
 
@@ -147,12 +147,12 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
 snowflake-architect-pro.md → Design schemas
 aws-snowflake-devops.md → Set up infrastructure  
 data-integrity-qa-engineer.md → Validate data quality
-tech-docs-writer.md → Document the pipeline
+doc-technical-writer.md → Document the pipeline
 ```
 
 ### Secure Application
 ```
-python-systems-engineer.md → Build application
+code-systems-engineer.md → Build application
 security-compliance-engineer.md → Implement security
 streamlit-data-app-builder.md → Create UI
 aws-snowflake-devops.md → Deploy securely
@@ -161,7 +161,7 @@ aws-snowflake-devops.md → Deploy securely
 ### Cost Optimization Initiative
 ```
 cloud-storage-optimizer.md → Optimize storage
-ai-model-orchestrator.md → Optimize AI costs
+core-orchestrator.md → Optimize AI costs
 aws-snowflake-devops.md → Infrastructure efficiency
 ```
 

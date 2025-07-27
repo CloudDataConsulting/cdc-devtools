@@ -1,272 +1,100 @@
-# Setup Flat Agent Structure with Proper Naming Convention
+# Fix and Optimize Claude Agents - Focused Task
 
-Please reorganize the imported Claude agents into a single flat directory with a clear naming convention, then set up symlinks for easy access.
+Please complete the agent organization by fixing the remaining issues with the imported agents.
 
-## 1. Reorganize to Flat Structure
+## Current Location
+The agents are currently in: `ai-agents/claude-prompts/`
 
-Move all agents from subdirectories into a single flat structure in CDC DevTools:
+## Task 0: Rename Folders for Clarity
 
-```
-ai-agents/claude-prompts/
-├── README.md
-├── NAMING_CONVENTION.md      # Document the naming rules
-├── code-reviewer.md          # Code quality agents
-├── code-test-writer.md
-├── data-architect.md         # Data engineering agents
-├── data-sql-optimizer.md
-├── data-etl-developer.md
-├── devops-terraform.md       # DevOps agents
-├── devops-aws-architect.md
-├── doc-technical-writer.md   # Documentation agents
-├── doc-api-documenter.md
-└── _templates/               # Keep templates in subdirectory
-    ├── basic-agent.md
-    └── specialist-agent.md
-```
-
-## 2. Naming Convention
-
-Document this in `NAMING_CONVENTION.md`:
-
-```markdown
-# CDC Agent Naming Convention
-
-All reusable agents follow this pattern:
-`[category]-[specific-role].md`
-
-## Categories:
-- `code-` : Code writing, reviewing, refactoring
-- `data-` : Data engineering, SQL, analytics
-- `devops-` : Infrastructure, deployment, CI/CD
-- `doc-` : Documentation, technical writing
-- `security-` : Security analysis, compliance
-- `test-` : Testing strategies, test writing
-- `api-` : API design and integration
-
-## Examples:
-- `code-reviewer.md` - Reviews code for quality
-- `data-architect.md` - Designs data systems
-- `devops-terraform.md` - Terraform specialist
-
-## Special Files:
-- `_templates/` - Templates for creating new agents
-- NO orchestrator here - each project has its own
-```
-
-## 3. Update Agent Files
-
-When renaming files, also update internal references:
-
-### Check for these common patterns:
-```markdown
-# If file was "orchestrator.md" becoming "core-orchestrator.md"
-
-# Update title/header
-OLD: # Orchestrator
-NEW: # Core-Orchestrator
-
-# Update any self-references
-OLD: Agent: orchestrator
-NEW: Agent: core-orchestrator
-
-# Update any "I am" statements
-OLD: I am an orchestrator agent
-NEW: I am a core-orchestrator agent
-
-# Update any function/role declarations
-OLD: Role: orchestrator
-NEW: Role: core-orchestrator
-```
-
-### Ensure each file has consistent naming:
-```markdown
-# [Category]-[Role] Agent
-
-**Agent Name**: [category]-[role]  # Must match filename!
-**Category**: [code|data|devops|doc|security|test|api]
-**Specialization**: [Specific expertise]
-**Best Used By**: Project orchestrators needing [specific skill]
-
-## Role
-[Clear one-sentence description]
-
-## Expertise
-[...]
-```
-
-### Search and Replace Pattern:
-For each file being renamed from `oldname.md` to `category-newname.md`:
-1. Search for: `oldname` (case-insensitive)
-2. Replace with: `category-newname`
-3. Check for variations: "Oldname", "OLDNAME", "old_name"
-
-## 4. Set Up Symlink
-
-After reorganizing, create the symlink:
+First, let's use better folder names:
 
 ```bash
-# Backup existing directory if needed
+# Rename claude-prompts to claude-agents (more descriptive)
+mv ai-agents/claude-prompts ai-agents/claude-agents
+
+# Move and rename templates folder
+mv ai-agents/claude-agents/templates ai-agents/claude-agent-templates
+```
+
+## Task 1: Verify Templates Are Separated
+
+Ensure templates are NOT inside the claude-agents folder:
+
+```bash
+# Verify structure
+tree ai-agents -L 2
+# Should show:
+# ai-agents/
+# ├── claude-agents/          (contains only actual agents)
+# ├── claude-agent-templates/ (contains templates, NOT inside claude-agents)
+# └── [other folders]
+```
+
+## Task 2: Fix Naming Consistency
+
+For each agent file in `ai-agents/claude-agents/`, ensure the internal name EXACTLY matches the filename (without .md):
+
+### File naming pattern:
+`category-specific-role.md`
+
+### Internal naming pattern:
+```markdown
+# category-specific-role
+```
+
+### Examples:
+- File: `data-architect.md` → Internal: `# data-architect`
+- File: `devops-terraform.md` → Internal: `# devops-terraform`
+- File: `code-reviewer.md` → Internal: `# code-reviewer`
+
+### For each file:
+1. Check the first line (title/name)
+2. Update it to EXACTLY match the filename (minus .md extension)
+3. Keep the hyphens and lowercase
+4. Also update any self-references in the agent description to match
+
+## Task 3: Set Up Symlink
+
+After all agents are cleaned up:
+
+```bash
+# Backup current ~/.claude/agents if it exists
 if [ -d ~/.claude/agents ]; then
-    mv ~/.claude/agents ~/.claude/agents.backup-$(date +%Y%m%d)
+    mv ~/.claude/agents ~/.claude/agents.backup-$(date +%Y%m%d-%H%M%S)
 fi
 
-# Create parent directory if needed
-mkdir -p ~/.claude
-
-# Create symlink
-ln -s ~/repos/cdc-devtools/ai-agents/claude-prompts ~/.claude/agents
+# Create symlink (using new folder name)
+ln -s $(pwd)/ai-agents/claude-agents ~/.claude/agents
 
 # Verify
 ls -la ~/.claude/agents
+echo "Total agents available: $(ls ~/.claude/agents/*.md | wc -l)"
 ```
 
-## 5. Create Project Orchestrator Template
+## Task 4: Create Summary
 
-Since orchestrators are project-specific, create a template in `_templates/project-orchestrator.md`:
+After completing all tasks, provide a summary:
+- How many agents were processed in claude-agents/
+- How many templates were moved to claude-agent-templates/
+- Confirmation that symlink is working (claude-agents → ~/.claude/agents)
 
-```markdown
-# Project Orchestrator - [PROJECT NAME]
+## Task 5: Update README References
 
-## Project Context
-[Project-specific information that this orchestrator needs]
-
-## Available Specialists
-You can delegate to these specialist agents:
-- code-reviewer.md - For code quality checks
-- data-architect.md - For data design decisions
-- devops-terraform.md - For infrastructure tasks
-[List relevant agents for this project]
-
-## Project-Specific Instructions
-[Any special rules or patterns for this project]
-
-## Workflow
-1. Understand the request
-2. Break down into specialist tasks
-3. Delegate to appropriate agents
-4. Synthesize results
-5. Ensure project standards are met
-```
-
-## 6. Document Usage Pattern
-
-Update the main README to explain the pattern:
-
-```markdown
-# CDC Claude Agents - Usage Pattern
-
-## Two-Tier System
-
-### 1. Reusable Specialist Agents (This Repository)
-- Live in `~/.claude/agents/` (symlinked to CDC DevTools)
-- Named by category and specialization
-- Used across all projects
-- Under source control
-
-### 2. Project Orchestrators (Individual Projects)
-- Live in each project directory
-- Know project-specific context
-- Delegate to specialist agents
-- Coordinate multi-agent workflows
-
-## Example Workflow
-
-1. Project has its own `orchestrator.md`
-2. Orchestrator understands request
-3. Orchestrator delegates to specialists:
-   - "Use data-architect.md for schema design"
-   - "Use code-reviewer.md for PR review"
-4. Orchestrator synthesizes results
-
-## Adding New Agents
+Update any README files to reflect the new naming:
 
 ```bash
-# Create new specialist
-vi ~/.claude/agents/data-migration-expert.md
+# Update ai-agents/README.md to reference:
+# - claude-agents/ (not claude-prompts/)
+# - claude-agent-templates/ (not templates/)
 
-# Automatically in source control!
-cd ~/repos/cdc-devtools
-git add -A
-git commit -m "Add data migration expert agent"
-git push
-```
+# Update any documentation that references the old names
 ```
 
-## 7. Migration Script
+## Do NOT handle these yet:
+- MCP configuration
+- Access levels
+- Team onboarding
+- Other optimizations
 
-Create `migrate-to-flat.sh` to help flatten existing structures AND update internal references:
-
-```bash
-#!/bin/bash
-# Flatten subdirectory structure and update internal references
-
-cd ai-agents/claude-prompts
-
-# Function to update internal references
-update_internal_refs() {
-    local file=$1
-    local old_name=$2
-    local new_name=$3
-
-    # Create case variations
-    old_lower=$(echo "$old_name" | tr '[:upper:]' '[:lower:]')
-    old_upper=$(echo "$old_name" | tr '[:lower:]' '[:upper:]')
-    old_title=$(echo "$old_name" | sed 's/.*/\u&/')
-
-    new_lower=$(echo "$new_name" | tr '[:upper:]' '[:lower:]')
-    new_upper=$(echo "$new_name" | tr '[:lower:]' '[:upper:]')
-    new_title=$(echo "$new_name" | sed 's/.*/\u&/')
-
-    # Update file content
-    sed -i.bak \
-        -e "s/${old_lower}/${new_lower}/g" \
-        -e "s/${old_upper}/${new_upper}/g" \
-        -e "s/${old_title}/${new_title}/g" \
-        -e "s/${old_name}/${new_name}/g" \
-        "$file"
-
-    # Remove backup
-    rm "${file}.bak"
-}
-
-# Move all .md files from subdirectories to current directory
-find . -mindepth 2 -name "*.md" -type f | while read file; do
-    # Extract category from directory name
-    category=$(dirname "$file" | cut -d'/' -f2 | sed 's/-agents$//')
-    filename=$(basename "$file")
-    basename_no_ext="${filename%.md}"
-
-    # Determine new name
-    if [[ ! "$filename" =~ ^[a-z]+-.*\.md$ ]]; then
-        newname="${category}-${filename}"
-        newbase="${category}-${basename_no_ext}"
-    else
-        newname="$filename"
-        newbase="$basename_no_ext"
-    fi
-
-    # Copy file to new location
-    cp "$file" "./$newname"
-
-    # Update internal references
-    update_internal_refs "./$newname" "$basename_no_ext" "$newbase"
-
-    echo "Migrated: $file -> $newname (updated internal refs)"
-done
-
-# Remove empty directories
-find . -mindepth 1 -type d -empty -delete
-
-echo "Migration complete! Check the updated files for accuracy."
-```
-
-## Summary
-
-This creates a clean, flat structure where:
-- All reusable agents are in one directory
-- Clear naming shows agent purpose
-- Easy to add new agents
-- Each project has its own orchestrator
-- Everything under source control
-
-The 20-30 agents you may have will be easily manageable with the category prefix naming!
+Just focus on getting the agents clean, consistent, and properly linked.

@@ -1,5 +1,5 @@
 ---
-name: python-systems-engineer
+name: code-systems-engineer
 description: Use this agent when you need to build production-grade Python systems with proper architecture, not just scripts. This includes creating reusable packages, implementing CLI tools, designing modular architectures, setting up testing frameworks, or refactoring prototype code into maintainable systems. Perfect for transforming proof-of-concepts into scalable solutions.
 Examples:
 <example>

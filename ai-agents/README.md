@@ -4,11 +4,11 @@ This directory contains two complementary types of AI agent resources for CDC pr
 
 ## Overview
 
-### 1. Claude Agent Prompts (`claude-prompts/`)
+### 1. Claude Agent Prompts (`claude-agents/`)
 Pre-written instructions for Claude to act as specialized agents:
 - **What**: Markdown files containing expert role definitions and methodologies
 - **Use**: Copy into Claude.ai interface or use with Anthropic API
-- **Browse**: See `claude-prompts/AGENT_REGISTRY.md` for full catalog
+- **Browse**: See `claude-agents/AGENT_REGISTRY.md` for full catalog
 - **Categories**: Core, Data, DevOps agents for different specialties
 
 ### 2. Python Agent Framework (`python-framework/`)
@@ -23,10 +23,10 @@ Programmatic agent implementations for automated workflows:
 ### Using Claude Prompts
 ```bash
 # 1. Browse available agents
-cat claude-prompts/AGENT_REGISTRY.md
+cat claude-agents/AGENT_REGISTRY.md
 
 # 2. Copy desired agent
-cat claude-prompts/data-agents/snowflake-architect-pro.md
+cat claude-agents/data-snowflake-architect-pro.md
 
 # 3. Paste into Claude and add your requirements
 ```
@@ -47,12 +47,13 @@ class MyAgent(ModelAwareAgent):
 
 ```
 ai-agents/
-├── claude-prompts/         # Claude agent instructions
-│   ├── core-agents/        # General-purpose agents
-│   ├── data-agents/        # Data engineering specialists
-│   ├── devops-agents/      # Infrastructure experts
-│   ├── templates/          # Templates for new agents
-│   └── AGENT_REGISTRY.md   # Complete catalog
+├── claude-agents/          # Claude agent instructions
+│   ├── *.md                # All agents in flat structure
+│   ├── AGENT_REGISTRY.md   # Complete catalog
+│   └── NAMING_CONVENTION.md # Naming standards
+├── claude-agent-templates/ # Templates for new agents
+│   ├── basic-agent.md
+│   └── project-orchestrator.md
 ├── python-framework/       # Python implementations
 │   ├── __init__.py
 │   ├── base_agent.py       # Base classes
