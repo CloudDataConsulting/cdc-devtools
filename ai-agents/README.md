@@ -1,32 +1,83 @@
 # CDC AI Agents
 
-Reusable AI agent components and orchestration patterns for CDC projects.
+This directory contains two complementary types of AI agent resources for CDC projects.
 
 ## Overview
 
-This directory contains:
-- Base agent implementations
-- Orchestration frameworks
-- Example implementations
-- Best practices for AI agent development
+### 1. Claude Agent Prompts (`claude-prompts/`)
+Pre-written instructions for Claude to act as specialized agents:
+- **What**: Markdown files containing expert role definitions and methodologies
+- **Use**: Copy into Claude.ai interface or use with Anthropic API
+- **Browse**: See `claude-prompts/AGENT_REGISTRY.md` for full catalog
+- **Categories**: Core, Data, DevOps agents for different specialties
 
-## Directory Structure
+### 2. Python Agent Framework (`python-framework/`)
+Programmatic agent implementations for automated workflows:
+- **What**: Python classes for building intelligent agents
+- **Use**: Import and extend in your Python projects
+- **Features**: Model routing, Git integration, orchestration
+- **Examples**: See `examples/` for implementation patterns
 
-- `base-agents/` - Foundational agent classes and utilities
-- `orchestrators/` - Multi-agent coordination systems
-- `examples/` - Reference implementations
+## Quick Start
 
-## Getting Started
+### Using Claude Prompts
+```bash
+# 1. Browse available agents
+cat claude-prompts/AGENT_REGISTRY.md
 
+# 2. Copy desired agent
+cat claude-prompts/data-agents/snowflake-architect-pro.md
+
+# 3. Paste into Claude and add your requirements
+```
+
+### Using Python Framework
 ```python
-# Example: Using a base agent
-from cdc_agents.base import BaseAgent
+# Import base classes
+from ai_agents.python_framework import ModelAwareAgent, GitAwareAgent
 
-class MyAgent(BaseAgent):
-    def process(self, input_data):
+# Create your agent
+class MyAgent(ModelAwareAgent):
+    def process(self, task):
         # Agent logic here
         pass
 ```
+
+## Directory Structure
+
+```
+ai-agents/
+├── claude-prompts/         # Claude agent instructions
+│   ├── core-agents/        # General-purpose agents
+│   ├── data-agents/        # Data engineering specialists
+│   ├── devops-agents/      # Infrastructure experts
+│   ├── templates/          # Templates for new agents
+│   └── AGENT_REGISTRY.md   # Complete catalog
+├── python-framework/       # Python implementations
+│   ├── __init__.py
+│   ├── base_agent.py       # Base classes
+│   ├── model_router.py     # Smart model selection
+│   └── git_manager.py      # Git automation
+├── orchestrators/          # Multi-agent coordination
+├── examples/               # Example implementations
+└── config/                 # Configuration files
+```
+
+## When to Use Each Type
+
+### Use Claude Prompts When:
+- Working interactively with Claude
+- Need expert guidance and methodology
+- Designing architecture or strategy
+- Reviewing code or documentation
+- One-off or exploratory tasks
+
+### Use Python Framework When:
+- Building automated systems
+- Need programmatic control
+- Integrating with CI/CD pipelines
+- Processing batches of tasks
+- Requiring deterministic behavior
 
 ## Development Guidelines
 
