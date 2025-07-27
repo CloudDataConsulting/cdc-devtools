@@ -1,0 +1,26 @@
+# Model routing configuration for CDC AI Agents
+model_routing:
+  default_threshold: 4  # Complexity score threshold for Opus
+
+  # Force specific models for certain agents
+  agent_overrides:
+    log_analyzer: sonnet
+    test_writer: sonnet
+    doc_generator: sonnet
+    system_architect: opus
+    orchestrator: opus
+
+  # Task-specific overrides
+  task_overrides:
+    generate_readme: sonnet
+    format_code: sonnet
+    analyze_logs: sonnet
+    design_system: opus
+    debug_production: opus
+
+  # Context triggers that upgrade to Opus
+  upgrade_triggers:
+    - production_environment
+    - multiple_failures
+    - client_critical
+    - architecture_change
