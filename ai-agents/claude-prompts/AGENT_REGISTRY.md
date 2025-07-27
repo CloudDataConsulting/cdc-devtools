@@ -4,8 +4,8 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
 
 ## Core Agents
 
-### AI Model Orchestrator
-- **File**: `core-agents/orchestrator.md`
+### Core Orchestrator
+- **File**: `core-orchestrator.md`
 - **Purpose**: Orchestrates multiple AI models for optimal performance and cost
 - **Best for**: Complex projects requiring intelligent model selection
 - **Key capabilities**: 
@@ -15,7 +15,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Parallel model execution
 
 ### Technical Documentation Writer
-- **File**: `core-agents/doc-writer.md`
+- **File**: `doc-technical-writer.md`
 - **Purpose**: Creates comprehensive technical documentation
 - **Best for**: README files, API docs, architecture guides
 - **Key capabilities**:
@@ -25,7 +25,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Style consistency
 
 ### Python Systems Engineer
-- **File**: `core-agents/systems-engineer.md`
+- **File**: `code-systems-engineer.md`
 - **Purpose**: Builds production-grade Python systems
 - **Best for**: Creating reusable packages, CLI tools, modular architectures
 - **Key capabilities**:
@@ -37,7 +37,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
 ## Data Agents
 
 ### Snowflake Architect Pro
-- **File**: `data-agents/snowflake-architect-pro.md`
+- **File**: `data-snowflake-architect-pro.md`
 - **Purpose**: Expert Snowflake database architecture and optimization
 - **Best for**: Schema design, performance tuning, security implementation
 - **Key capabilities**:
@@ -47,7 +47,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Comprehensive documentation
 
 ### Snowflake Data Architect
-- **File**: `data-agents/snowflake-data-architect.md`
+- **File**: `data-snowflake-data-architect.md`
 - **Purpose**: Data warehouse design and implementation
 - **Best for**: Enterprise data architecture, data modeling
 - **Key capabilities**:
@@ -57,7 +57,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Scalability planning
 
 ### Snowflake RAG Architect
-- **File**: `data-agents/snowflake-rag-architect.md`
+- **File**: `data-snowflake-rag-architect.md`
 - **Purpose**: Retrieval Augmented Generation systems using Snowflake
 - **Best for**: Document processing, vector search, AI-powered analytics
 - **Key capabilities**:
@@ -67,7 +67,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Snowflake Cortex integration
 
 ### Data Integrity QA Engineer
-- **File**: `data-agents/data-integrity-qa-engineer.md`
+- **File**: `test-data-integrity.md`
 - **Purpose**: Ensures data quality and integrity across systems
 - **Best for**: Data validation, migration testing, quality assurance
 - **Key capabilities**:
@@ -77,7 +77,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Zero data loss assurance
 
 ### Streamlit Data App Builder
-- **File**: `data-agents/streamlit-data-app-builder.md`
+- **File**: `code-streamlit-builder.md`
 - **Purpose**: Creates data-intensive Streamlit applications
 - **Best for**: MVPs, dashboards, Snowflake integrations
 - **Key capabilities**:
@@ -89,7 +89,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
 ## DevOps Agents
 
 ### AWS Snowflake DevOps Engineer
-- **File**: `devops-agents/aws-snowflake-devops.md`
+- **File**: `devops-aws-snowflake-devops.md`
 - **Purpose**: Infrastructure as Code for AWS and Snowflake
 - **Best for**: Terraform implementations, CI/CD pipelines
 - **Key capabilities**:
@@ -99,7 +99,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Cost optimization
 
 ### Cloud Storage Optimizer
-- **File**: `devops-agents/cloud-storage-optimizer.md`
+- **File**: `devops-cloud-storage-optimizer.md`
 - **Purpose**: Optimizes cloud storage for cost and performance
 - **Best for**: S3 lifecycle policies, storage architecture
 - **Key capabilities**:
@@ -109,7 +109,7 @@ A comprehensive catalog of specialized Claude agents for Cloud Data Consulting p
   - Disaster recovery planning
 
 ### Security Compliance Engineer
-- **File**: `devops-agents/security-compliance-engineer.md`
+- **File**: `security-compliance-engineer.md`
 - **Purpose**: Implements security measures and ensures compliance
 - **Best for**: Credential management, PII detection, audit trails
 - **Key capabilities**:

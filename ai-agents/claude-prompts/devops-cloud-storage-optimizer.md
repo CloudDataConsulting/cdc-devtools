@@ -1,21 +1,21 @@
 ---
-name: cloud-storage-optimizer
+name: devops-cloud-storage-optimizer
 description: Use this agent when you need to optimize cloud storage systems, particularly S3 buckets, for cost efficiency, performance, and reliability. This includes designing storage architectures, implementing lifecycle policies, setting up validation workflows, and establishing disaster recovery procedures. The agent excels at analyzing storage requirements, implementing cost-saving strategies, and ensuring data integrity and data security through automated validation and cleanup processes.
 Examples:
 <example>
   Context: The user is implementing a Zoom archival system that needs optimized S3 storage.
   user: "I need to set up S3 storage for our Zoom archival module"
-  assistant: "I'll use the cloud-storage-optimizer agent to design an optimal S3 bucket structure for your Zoom archival needs"
+  assistant: "I'll use the devops-cloud-storage-optimizer agent to design an optimal S3 bucket structure for your Zoom archival needs"
   <commentary>
-    Since the user needs S3 storage optimization for archival purposes, use the Task tool to launch the cloud-storage-optimizer agent.
+    Since the user needs S3 storage optimization for archival purposes, use the Task tool to launch the devops-cloud-storage-optimizer agent.
   </commentary>
 </example>
 <example>
   Context: The user wants to reduce S3 storage costs.
   user: "Our S3 costs are getting too high, can you help optimize them?"
-  assistant: "Let me use the cloud-storage-optimizer agent to analyze your storage patterns and implement cost optimization strategies"
+  assistant: "Let me use the devops-cloud-storage-optimizer agent to analyze your storage patterns and implement cost optimization strategies"
   <commentary>
-    The user needs help with S3 cost optimization, so use the cloud-storage-optimizer agent to implement lifecycle policies and storage optimizations.
+    The user needs help with S3 cost optimization, so use the devops-cloud-storage-optimizer agent to implement lifecycle policies and storage optimizations.
   </commentary>
 </example>
 color: blue

@@ -5,25 +5,25 @@ Examples:
 <example>
   Context: The user needs to build a reusable client library for an API integration.
   user: "I need to create a Zoom API client that handles authentication and rate limiting"
-  assistant: "I'll use the python-systems-engineer agent to design and implement a proper client library with all the necessary abstractions."
+  assistant: "I'll use the python-code-systems-engineer agent to design and implement a proper client library with all the necessary abstractions."
   <commentary>
-    Since this requires building a reusable, well-architected Python component with proper error handling and design patterns, the python-systems-engineer agent is the right choice.
+    Since this requires building a reusable, well-architected Python component with proper error handling and design patterns, the python-code-systems-engineer agent is the right choice.
   </commentary>
 </example>
 <example>
   Context: The user wants to convert a collection of scripts into a proper CLI tool.
   user: "Can you help me turn these transcript processing scripts into a unified command-line tool?"
-  assistant: "Let me engage the python-systems-engineer agent to architect a proper CLI application with subcommands and configuration management."
+  assistant: "Let me engage the python-code-systems-engineer agent to architect a proper CLI application with subcommands and configuration management."
   <commentary>
-    This task involves creating a well-structured CLI tool with proper architecture, making the python-systems-engineer agent appropriate.
+    This task involves creating a well-structured CLI tool with proper architecture, making the python-code-systems-engineer agent appropriate.
   </commentary>
 </example>
 <example>
   Context: The user has written some prototype code and needs it refactored into a maintainable system.
   user: "I've got this working prototype for processing YouTube transcripts, but it's all in one file. Can we make it more modular?"
-  assistant: "I'll use the python-systems-engineer agent to refactor this into a properly structured package with separated concerns and testable components."
+  assistant: "I'll use the python-code-systems-engineer agent to refactor this into a properly structured package with separated concerns and testable components."
   <commentary>
-    Refactoring prototype code into a well-architected system is exactly what the python-systems-engineer agent specializes in.
+    Refactoring prototype code into a well-architected system is exactly what the python-code-systems-engineer agent specializes in.
   </commentary>
 </example>
 color: green

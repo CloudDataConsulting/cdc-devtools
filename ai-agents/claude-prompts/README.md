@@ -1,240 +1,196 @@
-# CDC Claude Agent Prompts
+# CDC Claude Agents - Usage Pattern
 
-This directory contains reusable Claude agent prompts optimized for Cloud Data Consulting projects. These agents represent specialized expertise that can be invoked through Claude's interface or API.
+This directory contains reusable specialist agents that are symlinked to `~/.claude/agents/` for easy access across all projects.
+
+## Two-Tier System
+
+### 1. Reusable Specialist Agents (This Repository)
+- Live in `~/.claude/agents/` (symlinked from CDC DevTools)
+- Named by category and specialization (e.g., `data-architect.md`)
+- Used across all projects
+- Under source control in CDC DevTools
+
+### 2. Project Orchestrators (Individual Projects)
+- Live in each project's directory (e.g., `project/.claude/orchestrator.md`)
+- Know project-specific context
+- Delegate to specialist agents
+- Coordinate multi-agent workflows
 
 ## Quick Start
 
-### Using an Agent
+### Using Specialists Directly
+```bash
+# Browse available agents
+ls ~/.claude/agents/
 
-1. **Browse the Registry**: Check `AGENT_REGISTRY.md` for available agents
-2. **Select an Agent**: Choose based on your task requirements
-3. **Copy the Prompt**: Get the agent file from the appropriate category
-4. **Customize if Needed**: Add project-specific context
-5. **Use with Claude**: Paste into Claude.ai or use with API
+# View a specific agent
+cat ~/.claude/agents/data-snowflake-architect-pro.md
 
-### Example Usage
+# Copy into Claude.ai and use
+```
 
+### Project Workflow
 ```markdown
-# In Claude.ai or API:
-1. Copy contents of `data-agents/snowflake-architect-pro.md`
-2. Add your specific requirements
-3. Claude will respond as the specialized agent
+1. Project has its own orchestrator in `.claude/orchestrator.md`
+2. Orchestrator understands the request
+3. Orchestrator delegates to specialists:
+   - "Use data-snowflake-architect-pro.md for schema design"
+   - "Use code-reviewer.md for code review"
+4. Orchestrator synthesizes results for project context
 ```
 
-## Directory Structure
+## Flat Structure
+
+All agents follow the naming convention `[category]-[role].md`:
 
 ```
-claude-prompts/
-├── core-agents/        # General-purpose agents
-├── data-agents/        # Data engineering specialists
-├── devops-agents/      # Infrastructure and deployment
-├── templates/          # Templates for new agents
-└── AGENT_REGISTRY.md   # Complete agent catalog
+~/.claude/agents/
+├── code-reviewer.md              # Code quality
+├── code-systems-engineer.md      # System design
+├── code-streamlit-builder.md     # Streamlit apps
+├── data-snowflake-architect-pro.md
+├── data-snowflake-data-architect.md
+├── data-snowflake-rag-architect.md
+├── devops-aws-snowflake-devops.md
+├── devops-cloud-storage-optimizer.md
+├── doc-technical-writer.md
+├── security-compliance-engineer.md
+├── test-data-integrity.md
+└── _templates/                   # Templates for new agents
+    ├── basic-agent.md
+    └── project-orchestrator.md
 ```
 
-## Agent Categories
+## Categories
 
-### Core Agents
-Universal agents useful across all project types:
-- **Orchestrator**: Coordinates multi-agent workflows
-- **Doc Writer**: Creates technical documentation
-- **Systems Engineer**: Builds production Python systems
+- **`code-`**: Code writing, reviewing, refactoring
+- **`data-`**: Data engineering, SQL, analytics  
+- **`devops-`**: Infrastructure, deployment, CI/CD
+- **`doc-`**: Documentation, technical writing
+- **`security-`**: Security analysis, compliance
+- **`test-`**: Testing strategies, QA
+- **`api-`**: API design and integration
+- **`core-`**: Fundamental coordination agents
 
-### Data Agents
-Specialized for data engineering and analytics:
-- **Snowflake Architects**: Database design and optimization
-- **RAG Architect**: AI-powered data retrieval systems
-- **Data QA Engineer**: Ensures data integrity
-- **Streamlit Builder**: Creates data applications
+See `NAMING_CONVENTION.md` for detailed naming rules.
 
-### DevOps Agents
-Infrastructure and deployment specialists:
-- **AWS/Snowflake DevOps**: Terraform and IaC expert
-- **Storage Optimizer**: Cloud storage efficiency
-- **Security Engineer**: Compliance and security
+## Creating a Project Orchestrator
 
-## Customization Guide
+Every project should have its own orchestrator:
 
-### Adding Project Context
+```bash
+# In your project
+mkdir -p .claude
+cp ~/.claude/agents/_templates/project-orchestrator.md .claude/orchestrator.md
 
+# Customize with project context
+vi .claude/orchestrator.md
+```
+
+The orchestrator should include:
+- Project overview and tech stack
+- Available specialists for delegation
+- Project-specific standards
+- Business rules and constraints
+
+## Adding New Specialists
+
+```bash
+# Create new specialist
+vi ~/.claude/agents/data-migration-expert.md
+
+# Follow naming convention
+# Update AGENT_REGISTRY.md
+
+# Automatically in source control!
+cd ~/repos/cdc/cdc-devtools
+git add -A
+git commit -m "Add data migration expert agent"
+git push
+```
+
+## Example: Multi-Agent Workflow
+
+### Project Orchestrator delegates:
 ```markdown
-# Original agent prompt
-You are an expert Snowflake architect...
+Task: Design and implement user analytics system
 
-# Add your context after:
-## Project Context
-- Client: [Client Name]
-- Environment: [Dev/Staging/Prod]
-- Specific Requirements: [List requirements]
-- Constraints: [Any limitations]
+1. data-snowflake-architect-pro.md:
+   - Design analytics schema
+   - Optimize for query patterns
+
+2. code-systems-engineer.md:
+   - Build data ingestion service
+   - Create API endpoints
+
+3. test-data-integrity.md:
+   - Validate data quality
+   - Create test scenarios
+
+4. doc-technical-writer.md:
+   - Document the system
+   - Create user guides
 ```
 
-### Modifying Output Format
-
-Agents can be customized to match your preferred output:
-
-```markdown
-## Custom Output Format
-Please provide responses in the following structure:
-1. Summary (2-3 sentences)
-2. Detailed explanation
-3. Code examples
-4. Next steps
-```
-
-### Combining Agents
-
-For complex projects, use multiple agents in sequence:
-
-```markdown
-1. Start with snowflake-architect-pro for design
-2. Switch to aws-snowflake-devops for deployment
-3. Use data-integrity-qa-engineer for validation
-4. Finish with tech-docs-writer for documentation
-```
+### Benefits
+- **Reusability**: Specialists work across projects
+- **Consistency**: Same expert knowledge everywhere
+- **Maintainability**: Single source of truth
+- **Scalability**: Easy to add new specialists
+- **Version Control**: All changes tracked
 
 ## Best Practices
 
-### 1. Agent Selection
-- **Start Specific**: Use the most specialized agent for your task
-- **Check Registry**: Review capabilities in `AGENT_REGISTRY.md`
-- **Consider Combinations**: Some tasks benefit from multiple agents
+1. **Keep Specialists Focused**: Each agent should have one clear expertise
+2. **Project Context in Orchestrators**: Specialists are generic; orchestrators are specific
+3. **Clear Delegation**: Orchestrators should give specialists clear, bounded tasks
+4. **Update Registry**: Keep `AGENT_REGISTRY.md` current with all agents
 
-### 2. Context Provision
-- **Be Explicit**: Provide clear project requirements
-- **Include Constraints**: Mention any limitations upfront
-- **Share Examples**: Give examples of desired outputs
+## Integration with Claude
 
-### 3. Iterative Refinement
-- **Start Simple**: Begin with basic agent capabilities
-- **Add Complexity**: Layer in additional requirements
-- **Save Customizations**: Keep successful modifications
+### Manual Usage
+1. Copy agent content from `~/.claude/agents/[agent].md`
+2. Paste into Claude.ai
+3. Add your specific requirements
 
-### 4. Version Control
-```bash
-# Track agent customizations in your project
-project/
-├── .claude/
-│   ├── agents/
-│   │   ├── customized-architect.md
-│   │   └── project-specific-qa.md
-│   └── README.md
-```
-
-## Creating New Agents
-
-### Using Templates
-
-1. Start with `templates/agent-template.md` for comprehensive agents
-2. Use `templates/basic-agent.md` for focused, simple agents
-3. Follow the structure but adapt to your needs
-
-### Agent Components
-
-Every agent should include:
-- **Metadata**: Name, description, use cases
-- **Role Definition**: Clear statement of expertise
-- **Core Principles**: Guiding philosophy
-- **Methodology**: Step-by-step approach
-- **Output Standards**: Expected deliverables
-
-### Testing New Agents
-
-Before adding to the registry:
-1. Test with real project scenarios
-2. Verify output quality and consistency
-3. Get feedback from team members
-4. Document successful use cases
-
-## Integration with Projects
-
-### Project Structure
-```
-your-project/
-├── .claude/
-│   ├── agents/           # Project-specific agents
-│   ├── prompts/          # Common prompts
-│   └── context.md        # Project context
-├── src/
-└── docs/
-```
-
-### Workflow Integration
-
-1. **Development Phase**: Use systems-engineer for code
-2. **Testing Phase**: Use qa-engineer for validation
-3. **Documentation Phase**: Use doc-writer for guides
-4. **Deployment Phase**: Use devops agents for release
-
-## Advanced Usage
-
-### API Integration
-
+### API Usage
 ```python
-import anthropic
-
-# Load agent prompt
-with open('data-agents/snowflake-architect-pro.md', 'r') as f:
-    agent_prompt = f.read()
+# Load specialist
+with open(os.path.expanduser('~/.claude/agents/data-architect.md')) as f:
+    specialist = f.read()
 
 # Use with API
-client = anthropic.Client(api_key="...")
-response = client.completions.create(
-    prompt=f"{agent_prompt}\n\nUser: {user_request}",
-    model="claude-3-opus-20240229",
+response = claude_client.complete(
+    prompt=f"{specialist}\n\nTask: {user_task}",
     max_tokens=4000
 )
 ```
 
-### Batch Processing
+### VS Code Extension
+The Claude VS Code extension can access agents from:
+- `~/.claude/agents/` - Global specialists
+- `.claude/` - Project-specific orchestrators
 
-For multiple related tasks:
-```python
-agents = {
-    'design': 'snowflake-architect-pro.md',
-    'implement': 'python-systems-engineer.md',
-    'test': 'data-integrity-qa-engineer.md',
-    'document': 'tech-docs-writer.md'
-}
+## Troubleshooting
 
-for phase, agent_file in agents.items():
-    # Process each phase with appropriate agent
-    pass
-```
+### "Agent not found"
+- Check the symlink: `ls -la ~/.claude/agents`
+- Ensure you're using correct naming: `category-role.md`
 
-## Metrics and Improvement
+### "Orchestrator missing context"
+- Each project needs its own orchestrator
+- Copy from `_templates/project-orchestrator.md`
 
-### Track Usage
-- Which agents are used most frequently
-- Common customizations needed
-- Success rates for different tasks
-
-### Gather Feedback
-- Team satisfaction with agent outputs
-- Time saved using agents
-- Quality improvements observed
-
-### Continuous Improvement
-- Update agents based on new best practices
-- Add new agents for emerging needs
-- Refine based on team feedback
+### Updates not showing
+- Pull latest from CDC DevTools
+- The symlink automatically reflects updates
 
 ## Contributing
 
-To contribute new agents or improvements:
+To contribute new agents:
+1. Follow naming convention in `NAMING_CONVENTION.md`
+2. Use templates from `_templates/`
+3. Update `AGENT_REGISTRY.md`
+4. Submit PR to CDC DevTools
 
-1. Follow the template structure
-2. Test thoroughly with real scenarios
-3. Document use cases and examples
-4. Submit PR with:
-   - Agent file in correct category
-   - Registry update
-   - Example usage
-   - Test results
-
-## Support
-
-- **Questions**: Ask in #ai-agents Slack channel
-- **Issues**: Report in GitHub issues
-- **Improvements**: Submit PRs with enhancements
-- **Training**: Request agent training sessions
+For questions, ask in #ai-agents Slack channel.

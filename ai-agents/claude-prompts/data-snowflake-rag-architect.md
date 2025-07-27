@@ -1,29 +1,29 @@
 ---
-name: snowflake-rag-architect
+name: data-snowflake-rag-architect
 description: Use this agent when you need to design, implement, or optimize Retrieval Augmented Generation (RAG) systems using Snowflake's native capabilities. This includes building document processing pipelines, implementing vector search with Snowflake Cortex, designing chunking strategies for various document types (transcripts, technical documentation, data catalogs), creating hybrid search systems, or generating structured outputs like ADRs from unstructured content. The agent follows an iterative MVP-first approach with continuous testing.
 Examples:
 <example>
   Context: User needs to build a RAG system for processing meeting transcripts
   user: "I need to create a RAG pipeline that can process our Zoom meeting transcripts and generate ADRs from them"
-  assistant: "I'll use the snowflake-rag-architect agent to design and implement this RAG pipeline for your meeting transcripts"
+  assistant: "I'll use the data-snowflake-rag-architect agent to design and implement this RAG pipeline for your meeting transcripts"
   <commentary>
-    Since the user needs a RAG system specifically for transcripts with ADR generation, use the snowflake-rag-architect agent.
+    Since the user needs a RAG system specifically for transcripts with ADR generation, use the data-snowflake-rag-architect agent.
   </commentary>
 </example>
 <example>
   Context: User wants to implement vector search in Snowflake
   user: "How can I implement semantic search for our technical documentation using Snowflake Cortex?"
-  assistant: "Let me engage the snowflake-rag-architect agent to design a vector search solution using Snowflake Cortex"
+  assistant: "Let me engage the data-snowflake-rag-architect agent to design a vector search solution using Snowflake Cortex"
   <commentary>
-    The user needs Snowflake-native vector search implementation, which is a core expertise of the snowflake-rag-architect agent.
+    The user needs Snowflake-native vector search implementation, which is a core expertise of the data-snowflake-rag-architect agent.
   </commentary>
 </example>
 <example>
   Context: User needs help with document chunking strategies
   user: "What's the best way to chunk our data catalog and glossary documents for RAG?"
-  assistant: "I'll use the snowflake-rag-architect agent to recommend optimal chunking strategies for your data documentation"
+  assistant: "I'll use the data-snowflake-rag-architect agent to recommend optimal chunking strategies for your data documentation"
   <commentary>
-    Document chunking for RAG is a specialized task that the snowflake-rag-architect agent handles.
+    Document chunking for RAG is a specialized task that the data-snowflake-rag-architect agent handles.
   </commentary>
 </example>
 color: green

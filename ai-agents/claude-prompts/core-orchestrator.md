@@ -6,25 +6,25 @@ Examples:
 <example>
   Context: The user is building a multi-model testing interface for transcript analysis.
   user: "I need to create a system that can test the same prompt across OpenAI and Anthropic models"
-  assistant: "I'll use the ai-model-orchestrator agent to help design and implement this multi-model testing system"
+  assistant: "I'll use the ai-model-core-orchestrator agent to help design and implement this multi-model testing system"
   <commentary>
-    Since the user needs to orchestrate multiple AI models and compare their outputs, the ai-model-orchestrator agent is the appropriate choice.
+    Since the user needs to orchestrate multiple AI models and compare their outputs, the ai-model-core-orchestrator agent is the appropriate choice.
   </commentary>
 </example>
 <example>
   Context: The user wants to optimize prompt performance and reduce API costs.
   user: "Our transcript processing is getting expensive. Can we optimize the prompts to use fewer tokens while maintaining quality?"
-  assistant: "Let me engage the ai-model-orchestrator agent to analyze your current prompts and implement optimization strategies"
+  assistant: "Let me engage the ai-model-core-orchestrator agent to analyze your current prompts and implement optimization strategies"
   <commentary>
-    The user needs expertise in prompt engineering and cost optimization, which are core competencies of the ai-model-orchestrator agent.
+    The user needs expertise in prompt engineering and cost optimization, which are core competencies of the ai-model-core-orchestrator agent.
   </commentary>
 </example>
 <example>
   Context: The user is implementing a new prompt methodology.
   user: "I want to implement Chain-of-Thought prompting for our analysis pipeline"
-  assistant: "I'll use the ai-model-orchestrator agent to properly implement Chain-of-Thought methodology in your system"
+  assistant: "I'll use the ai-model-core-orchestrator agent to properly implement Chain-of-Thought methodology in your system"
   <commentary>
-    Implementing specific prompt methodologies requires the specialized knowledge of the ai-model-orchestrator agent.
+    Implementing specific prompt methodologies requires the specialized knowledge of the ai-model-core-orchestrator agent.
   </commentary>
 </example>
 color: yellow

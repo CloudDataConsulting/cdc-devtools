@@ -55,11 +55,34 @@ All reusable agents follow this pattern:
 
 ## 3. Update Agent Files
 
-Ensure each agent file has a clear header:
+When renaming files, also update internal references:
 
+### Check for these common patterns:
+```markdown
+# If file was "orchestrator.md" becoming "core-orchestrator.md"
+
+# Update title/header
+OLD: # Orchestrator
+NEW: # Core-Orchestrator
+
+# Update any self-references
+OLD: Agent: orchestrator
+NEW: Agent: core-orchestrator
+
+# Update any "I am" statements
+OLD: I am an orchestrator agent
+NEW: I am a core-orchestrator agent
+
+# Update any function/role declarations
+OLD: Role: orchestrator
+NEW: Role: core-orchestrator
+```
+
+### Ensure each file has consistent naming:
 ```markdown
 # [Category]-[Role] Agent
 
+**Agent Name**: [category]-[role]  # Must match filename!
 **Category**: [code|data|devops|doc|security|test|api]
 **Specialization**: [Specific expertise]
 **Best Used By**: Project orchestrators needing [specific skill]
@@ -70,6 +93,12 @@ Ensure each agent file has a clear header:
 ## Expertise
 [...]
 ```
+
+### Search and Replace Pattern:
+For each file being renamed from `oldname.md` to `category-newname.md`:
+1. Search for: `oldname` (case-insensitive)
+2. Replace with: `category-newname`
+3. Check for variations: "Oldname", "OLDNAME", "old_name"
 
 ## 4. Set Up Symlink
 
@@ -165,33 +194,70 @@ git push
 
 ## 7. Migration Script
 
-Create `migrate-to-flat.sh` to help flatten existing structures:
+Create `migrate-to-flat.sh` to help flatten existing structures AND update internal references:
 
 ```bash
 #!/bin/bash
-# Flatten subdirectory structure
+# Flatten subdirectory structure and update internal references
 
 cd ai-agents/claude-prompts
+
+# Function to update internal references
+update_internal_refs() {
+    local file=$1
+    local old_name=$2
+    local new_name=$3
+
+    # Create case variations
+    old_lower=$(echo "$old_name" | tr '[:upper:]' '[:lower:]')
+    old_upper=$(echo "$old_name" | tr '[:lower:]' '[:upper:]')
+    old_title=$(echo "$old_name" | sed 's/.*/\u&/')
+
+    new_lower=$(echo "$new_name" | tr '[:upper:]' '[:lower:]')
+    new_upper=$(echo "$new_name" | tr '[:lower:]' '[:upper:]')
+    new_title=$(echo "$new_name" | sed 's/.*/\u&/')
+
+    # Update file content
+    sed -i.bak \
+        -e "s/${old_lower}/${new_lower}/g" \
+        -e "s/${old_upper}/${new_upper}/g" \
+        -e "s/${old_title}/${new_title}/g" \
+        -e "s/${old_name}/${new_name}/g" \
+        "$file"
+
+    # Remove backup
+    rm "${file}.bak"
+}
 
 # Move all .md files from subdirectories to current directory
 find . -mindepth 2 -name "*.md" -type f | while read file; do
     # Extract category from directory name
     category=$(dirname "$file" | cut -d'/' -f2 | sed 's/-agents$//')
     filename=$(basename "$file")
+    basename_no_ext="${filename%.md}"
 
-    # Rename with category prefix if not already present
+    # Determine new name
     if [[ ! "$filename" =~ ^[a-z]+-.*\.md$ ]]; then
         newname="${category}-${filename}"
+        newbase="${category}-${basename_no_ext}"
     else
         newname="$filename"
+        newbase="$basename_no_ext"
     fi
 
-    # Move file
-    mv "$file" "./$newname"
+    # Copy file to new location
+    cp "$file" "./$newname"
+
+    # Update internal references
+    update_internal_refs "./$newname" "$basename_no_ext" "$newbase"
+
+    echo "Migrated: $file -> $newname (updated internal refs)"
 done
 
 # Remove empty directories
 find . -mindepth 1 -type d -empty -delete
+
+echo "Migration complete! Check the updated files for accuracy."
 ```
 
 ## Summary
@@ -203,4 +269,4 @@ This creates a clean, flat structure where:
 - Each project has its own orchestrator
 - Everything under source control
 
-The 20-30 agents you have will be easily manageable with the category prefix naming!
+The 20-30 agents you may have will be easily manageable with the category prefix naming!

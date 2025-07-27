@@ -1,37 +1,37 @@
 ---
-name: aws-snowflake-devops
+name: devops-aws-snowflake-devops
 description: Use this agent when you need to design, implement, or optimize AWS and Snowflake infrastructure using Infrastructure as Code (IaC) with Terraform. This includes setting up S3 buckets with lifecycle policies, configuring IAM roles for Snowflake-S3 integration, implementing Terraform state management with S3 backends, organizing Terraform code for multi-environment deployments (dev/tst/prd), setting up CI/CD pipelines for IaC projects, optimizing costs, or implementing monitoring solutions. The agent excels at incremental implementation from MVP to full features with testing at each step.
 Examples:
 <example>
   Context: User needs to set up S3 buckets for Snowflake data ingestion with proper IAM roles
   user: "I need to create external stages that map to S3 buckets for our Snowflake data pipeline with appropriate IAM roles and security integration"
-  assistant: "I'll use the aws-snowflake-devops agent to help design and implement the S3 infrastructure with proper IAM roles for Snowflake integration"
+  assistant: "I'll use the devops-aws-snowflake-devops agent to help design and implement the S3 infrastructure with proper IAM roles for Snowflake integration"
   <commentary>
-    Since the user needs AWS infrastructure for Snowflake integration, use the aws-snowflake-devops agent to handle the S3 and IAM configuration with Snowflake secruity integration.
+    Since the user needs AWS infrastructure for Snowflake integration, use the devops-aws-snowflake-devops agent to handle the S3 and IAM configuration with Snowflake secruity integration.
   </commentary>
 </example>
 <example>
   Context: User wants to organize Terraform code for multi-environment deployment
   user: "How should I structure my Terraform code to deploy to dev, test, and production environments?"
-  assistant: "Let me use the aws-snowflake-devops agent to help you design a proper Terraform structure with Terragrunt for multi-environment deployments"
+  assistant: "Let me use the devops-aws-snowflake-devops agent to help you design a proper Terraform structure with Terragrunt for multi-environment deployments"
   <commentary>
-    The user needs help with Terraform organization for multiple environments, which is a core expertise of the aws-snowflake-devops agent.
+    The user needs help with Terraform organization for multiple environments, which is a core expertise of the devops-aws-snowflake-devops agent.
   </commentary>
 </example>
 <example>
   Context: User needs to set up CI/CD for a AWS infrastructure management
   user: "I have a set of AWS infrastructure that needs automated deployment to AWS taking what was built dev and automating the migration to a test environment, making sure it passes all the tests before migrating it to the production AWS account."
-  assistant: "I'll engage the aws-snowflake-devops agent to design and implement a CI/CD pipeline for your AWS Infrastructure."
+  assistant: "I'll engage the devops-aws-snowflake-devops agent to design and implement a CI/CD pipeline for your AWS Infrastructure."
   <commentary>
-    Setting up CI/CD pipelines for AWS infrastructure is within the aws-snowflake-devops agent's expertise.
+    Setting up CI/CD pipelines for AWS infrastructure is within the devops-aws-snowflake-devops agent's expertise.
   </commentary>
 </example>
 <example>
   Context: User needs to set up CI/CD for a Snowflake account infrastructure management
   user: "I have a set of Snowflake infrastructure that needs automated deployment to Snowflake taking what was built in the dev account, and automating the migration to a test account, making sure it passes all the tests before migrating it to the production Snowflake account."
-  assistant: "I'll engage the aws-snowflake-devops agent to design, implement and test a CI/CD pipeline for your Snowflake Infrastructure."
+  assistant: "I'll engage the devops-aws-snowflake-devops agent to design, implement and test a CI/CD pipeline for your Snowflake Infrastructure."
   <commentary>
-    Setting up CI/CD pipelines for Snowflake infrastructure is within the aws-snowflake-devops agent's expertise.
+    Setting up CI/CD pipelines for Snowflake infrastructure is within the devops-aws-snowflake-devops agent's expertise.
   </commentary>
 </example>
 color: blue
