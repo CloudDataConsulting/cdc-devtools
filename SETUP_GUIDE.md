@@ -121,6 +121,15 @@ export CDC_SLACK_WEBHOOK_URL="https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
 cdc-create-session myproject ~/repos/cdc/myproject
 ```
 
+#### Session with Configuration File
+```bash
+# Generate config file if missing
+cdc-create-session -g myproject ~/repos/cdc/myproject
+
+# Use custom config file
+cdc-create-session -c custom.conf myproject ~/repos/cdc/myproject
+```
+
 #### Session with Custom Layout
 ```bash
 # 4 panes in tiled layout
@@ -131,6 +140,26 @@ cdc-create-session -l tiled -p 4 analytics ~/repos/cdc/analytics
 ```bash
 # Use AI agent project template
 cdc-create-session -t ai-agent-project ml-bot ~/repos/cdc/ml-bot
+```
+
+### Importing Existing Projects
+
+#### Basic Import
+```bash
+# Import with default settings
+cdc-import-project ~/repos/existing-project
+
+# Import with name and type
+cdc-import-project -n "Data Pipeline" -t data-pipeline ~/repos/etl-project
+```
+
+#### AI Project Import
+```bash
+# Import as AI agent project
+cdc-import-project -n "ML Bot" -t ai-agent-project ~/repos/ml-bot
+
+# Then edit .cdc-project.conf to configure agents:
+vim ~/repos/ml-bot/.cdc-project.conf
 ```
 
 ### Monitoring

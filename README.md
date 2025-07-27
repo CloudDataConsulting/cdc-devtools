@@ -64,10 +64,53 @@ cdc-devtools/
 
 After setup, these commands are available in your PATH:
 
-- `cdc-create-session` - Create a new project session
+- `cdc-create-session` - Create a new project session with logging
 - `cdc-monitor` - Launch the unified monitoring dashboard
+- `cdc-monitor-project` - Monitor a specific project
 - `cdc-onboard` - Onboard a new developer
+- `cdc-import-project` - Import existing project with CDC tools
+- `cdc-summary` - Generate work summary from logs
 - `cdc-logs` - View CDC logs
+
+## Importing Existing Projects
+
+To add CDC DevTools to an existing project:
+
+```bash
+# Basic import
+cdc-import-project ~/repos/myproject
+
+# Import with specific type
+cdc-import-project -n "My ML Bot" -t ai-agent-project ~/repos/ml-bot
+
+# Force overwrite existing config
+cdc-import-project -f ~/repos/existing-project
+```
+
+This will:
+- Create a `.cdc-project.conf` configuration file
+- Set up logging directories
+- Update `.gitignore` with CDC entries
+- Add CDC section to README
+- Configure git hooks for commit tracking
+
+## Configuration Files
+
+Projects use `.cdc-project.conf` files to define:
+- Project name and type
+- AI agents (for AI projects)
+- Custom tmux windows
+- Logging preferences
+- Monitoring settings
+
+Example for AI projects:
+```bash
+AGENTS=(
+    "orchestrator:Main Orchestrator"
+    "data:Data Processing Agent"
+    "model:Model Training Agent"
+)
+```
 
 ## Contributing
 
