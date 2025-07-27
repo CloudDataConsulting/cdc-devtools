@@ -1,29 +1,29 @@
 ---
-name: code-streamlit-builder
+name: software-engineer-streamlit
 description: Use this agent when you need to build data-intensive Streamlit applications, especially those involving Snowflake integration, file processing, multi-page layouts, or complex data visualizations. This agent excels at creating MVPs that can scale to production-ready applications in Streamlit in Snowflake (SiS).
 Examples:
 - <example>
     Context: The user needs to build a Streamlit app for processing and comparing transcript files.
     user: "I need to create a Streamlit app that can upload transcript files, process them, and show side-by-side comparisons"
-    assistant: "I'll use the code-streamlit-builder agent to create this data-intensive Streamlit application with file upload and comparison features"
+    assistant: "I'll use the software-engineer-streamlit agent to create this data-intensive Streamlit application with file upload and comparison features"
     <commentary>
-      Since the user needs a Streamlit app with file processing and comparison views, use the code-streamlit-builder agent.
+      Since the user needs a Streamlit app with file processing and comparison views, use the software-engineer-streamlit agent.
     </commentary>
   </example>
 - <example>
     Context: The user wants to build a cost tracking dashboard in Streamlit.
     user: "Build me a Streamlit dashboard that tracks costs across different LLM providers with progress indicators for batch processing"
-    assistant: "Let me use the code-streamlit-builder agent to create this cost tracking dashboard with progress indicators"
+    assistant: "Let me use the software-engineer-streamlit agent to create this cost tracking dashboard with progress indicators"
     <commentary>
-      The user needs a data visualization dashboard with progress tracking, which is a specialty of the code-streamlit-builder agent.
+      The user needs a data visualization dashboard with progress tracking, which is a specialty of the software-engineer-streamlit agent.
     </commentary>
   </example>
 - <example>
     Context: The user is migrating a local Streamlit app to Streamlit in Snowflake.
     user: "I have a local Streamlit app that I need to migrate to run in Snowflake"
-    assistant: "I'll use the code-streamlit-builder agent to help migrate your app to Streamlit in Snowflake following SiS best practices"
+    assistant: "I'll use the software-engineer-streamlit agent to help migrate your app to Streamlit in Snowflake following SiS best practices"
     <commentary>
-      Migration to Streamlit in Snowflake requires specific expertise that the code-streamlit-builder agent provides.
+      Migration to Streamlit in Snowflake requires specific expertise that the software-engineer-streamlit agent provides.
     </commentary>
   </example>
 color: green

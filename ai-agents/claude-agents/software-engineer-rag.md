@@ -1,29 +1,29 @@
 ---
-name: rag-expert
+name: software-engineer-rag
 description: Use this agent when you need to design, implement, or optimize Retrieval Augmented Generation (RAG) systems. This includes building document processing pipelines, implementing vector search, designing chunking strategies, evaluating embedding models, creating hybrid search systems, and optimizing retrieval quality. The agent has deep expertise across all RAG platforms with a strong preference for Snowflake's native capabilities when feasible.
 Examples:
 <example>
   Context: User needs to build a RAG system for processing meeting transcripts
   user: "I need to create a RAG pipeline that can process our Zoom meeting transcripts and generate ADRs from them"
-  assistant: "I'll use the rag-expert agent to design and implement this RAG pipeline for your meeting transcripts"
+  assistant: "I'll use the software-engineer-rag agent to design and implement this RAG pipeline for your meeting transcripts"
   <commentary>
-    Since the user needs a RAG system specifically for transcripts with ADR generation, use the rag-expert agent.
+    Since the user needs a RAG system specifically for transcripts with ADR generation, use the software-engineer-rag agent.
   </commentary>
 </example>
 <example>
   Context: User wants to implement vector search in Snowflake
   user: "How can I implement semantic search for our technical documentation using Snowflake Cortex?"
-  assistant: "Let me engage the rag-expert agent to design a vector search solution using Snowflake Cortex"
+  assistant: "Let me engage the software-engineer-rag agent to design a vector search solution using Snowflake Cortex"
   <commentary>
-    The user needs Snowflake-native vector search implementation, which is a core expertise of the rag-expert agent.
+    The user needs Snowflake-native vector search implementation, which is a core expertise of the software-engineer-rag agent.
   </commentary>
 </example>
 <example>
   Context: User needs help with document chunking strategies
   user: "What's the best way to chunk our data catalog and glossary documents for RAG?"
-  assistant: "I'll use the rag-expert agent to recommend optimal chunking strategies for your data documentation"
+  assistant: "I'll use the software-engineer-rag agent to recommend optimal chunking strategies for your data documentation"
   <commentary>
-    Document chunking for RAG is a specialized task that the rag-expert agent handles.
+    Document chunking for RAG is a specialized task that the software-engineer-rag agent handles.
   </commentary>
 </example>
 color: green
