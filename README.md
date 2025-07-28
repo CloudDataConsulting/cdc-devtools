@@ -41,11 +41,13 @@ cdc-create-session myproject ~/repos/cdc/myproject
 - Example implementations
 - Best practices documentation
 
-### 📊 Unified Monitoring
-- Real-time session monitoring
-- Resource usage tracking
-- Health checks and alerts
-- Slack integration
+### 📊 Advanced Monitoring & Analytics
+- Real-time session monitoring with tmux integration
+- AI model usage analytics and cost optimization
+- Git activity tracking for AI agents
+- Intelligent model routing (Opus vs Sonnet)
+- Resource usage tracking and alerts
+- Slack integration for notifications
 
 ### 👥 Team Setup
 - Automated developer onboarding
@@ -58,6 +60,12 @@ cdc-create-session myproject ~/repos/cdc/myproject
 - Git configuration templates
 - Tmux productivity settings
 - Personal customization support
+
+### 🧠 Intelligent Cost Optimization
+- Automatic model selection based on task complexity
+- Usage pattern analysis and recommendations
+- Cost tracking and budget alerts
+- Context-aware secrets management
 
 ## Directory Structure
 
@@ -159,6 +167,47 @@ class MyAgent(GitAwareAgent):
         # Automatically commits and pushes!
 ```
 
+## Python Monitoring Tools
+
+CDC DevTools includes sophisticated Python-based monitoring and analytics:
+
+### Model Usage Analytics
+Track and optimize AI model usage:
+```bash
+# Analyze recent usage and costs
+cdc-analyze-models
+
+# Get optimization recommendations
+cdc-analyze-models --optimize
+```
+
+### Git Activity Monitoring
+Monitor AI agent git commits:
+```bash
+# Real-time monitoring
+cdc-git-monitor
+
+# View AI commit history
+git ai-log
+
+# Get commit statistics
+git ai-stats
+```
+
+### Intelligent Model Routing
+The system automatically routes tasks to the most cost-effective model:
+- **Sonnet**: Simple queries, documentation, basic edits
+- **Opus**: Complex algorithms, architectural decisions, debugging
+
+### Tmux Integration
+Monitoring tools integrate seamlessly with tmux sessions:
+- Automatic monitoring windows for AI projects
+- Real-time display of metrics
+- Context-aware configuration per window
+- Integrated logging and analytics
+
+See [monitoring/README.md](monitoring/README.md) for detailed documentation.
+
 ## Developer Configuration
 
 CDC DevTools includes optional shell configurations to standardize common developer tasks:
@@ -178,6 +227,13 @@ See [developer-config/README.md](developer-config/README.md) for installation an
 4. Submit a pull request
 
 See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed setup and contribution guidelines.
+
+## Documentation
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System design and integration patterns
+- **[ROADMAP.md](ROADMAP.md)** - Future features and development plans
+- **[monitoring/README.md](monitoring/README.md)** - Python monitoring tools guide
+- **[bin/README.md](bin/README.md)** - Command reference documentation
 
 ## Support
 
