@@ -20,6 +20,17 @@ Programmatic agent implementations for automated workflows:
 
 ## Quick Start
 
+### Initial Setup - Create Symbolic Link
+For Claude Code to automatically discover agents, set up a symbolic link:
+```bash
+# Create symlink from home directory to this repository
+ln -s ~/repos/cdc/cdc-devtools/ai-agents/claude-agents ~/.claude/agents
+
+# Verify setup
+ls -la ~/.claude/agents/
+```
+See `claude-agents/README.md` for detailed setup instructions and troubleshooting.
+
 ### Using Claude Prompts
 ```bash
 # 1. Browse available agents

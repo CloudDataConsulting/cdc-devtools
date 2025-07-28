@@ -2,6 +2,76 @@
 
 This directory contains reusable specialist agents that are symlinked to `~/.claude/agents/` for easy access across all projects.
 
+## Setting Up the Symbolic Link
+
+### What is a Symbolic Link?
+
+A symbolic link (or "symlink") is a special type of file that points to another file or directory. Think of it as a shortcut or alias:
+- It acts like the original file/directory but doesn't duplicate the content
+- Changes to files in either location are immediately reflected in both
+- Deleting the symlink doesn't delete the original files
+- It's like having the same folder accessible from multiple locations
+
+### Why Use a Symlink for Claude Agents?
+
+This setup provides several benefits:
+1. **Centralized Management**: All agents are maintained in the CDC DevTools repository
+2. **Automatic Updates**: When you pull the latest changes from git, your `~/.claude/agents/` automatically has the updates
+3. **Version Control**: All agent changes are tracked in git
+4. **Claude Code Integration**: Claude Code automatically discovers agents in `~/.claude/agents/`
+5. **Cross-Project Access**: Same agents available for all your projects
+
+### How to Set Up the Symlink
+
+```bash
+# 1. Remove any existing ~/.claude/agents directory (backup first if needed)
+rm -rf ~/.claude/agents
+
+# 2. Create the .claude directory if it doesn't exist
+mkdir -p ~/.claude
+
+# 3. Create the symbolic link
+ln -s ~/repos/cdc/cdc-devtools/ai-agents/claude-agents ~/.claude/agents
+
+# 4. Verify the symlink was created correctly
+ls -la ~/.claude/
+# Should show: agents -> /Users/[your-username]/repos/cdc/cdc-devtools/ai-agents/claude-agents
+```
+
+### Verifying Your Setup
+
+```bash
+# Check that the symlink points to the right location
+readlink ~/.claude/agents
+# Output: /Users/[your-username]/repos/cdc/cdc-devtools/ai-agents/claude-agents
+
+# List agents to confirm access
+ls ~/.claude/agents/
+# Should show all the .md agent files
+
+# Test reading an agent
+cat ~/.claude/agents/data-architect.md
+# Should display the agent content
+```
+
+### Troubleshooting
+
+**"No such file or directory" error:**
+- Ensure CDC DevTools is cloned to `~/repos/cdc/cdc-devtools`
+- Check the path: `ls ~/repos/cdc/cdc-devtools/ai-agents/claude-agents`
+
+**Symlink points to wrong location:**
+```bash
+# Remove incorrect symlink
+rm ~/.claude/agents
+# Recreate with correct path
+ln -s ~/repos/cdc/cdc-devtools/ai-agents/claude-agents ~/.claude/agents
+```
+
+**Permission issues:**
+- Ensure you have read permissions on the CDC DevTools repository
+- The symlink itself needs only read permissions
+
 ## Two-Tier System
 
 ### 1. Reusable Specialist Agents (This Repository)
