@@ -133,7 +133,7 @@ def select_mcp_server_for_project(project_requirements):
         "4_test": prototype_integration(),
         "5_decide": make_build_vs_buy_decision()
     }
-    
+
     return process
 
 def analyze_requirements(requirements):
@@ -146,6 +146,17 @@ def analyze_requirements(requirements):
         "compliance": requirements.get("compliance_needs", [])
     }
 ```
+
+## MCP Server Evaluation Requirements
+
+When using MCP agents to recommend or evaluate software/servers:
+
+- **ALWAYS research user reviews, ratings, and adoption statistics FIRST**
+- Check for known issues, compatibility problems, and maintenance status
+- Only recommend software with proven reliability and active community
+- Lead with review research and real-world feedback, not just feature lists
+- Verify package names exist and are not deprecated before recommending installation
+- Consider ecosystem maturity and whether alternatives might be better
 
 ### Existing MCP Ecosystem
 
@@ -226,29 +237,29 @@ cdc_project_mcp_stack:
     - name: "zoom-mcp"
       purpose: "Meeting recordings and transcripts"
       alternatives: ["generic-video-conf-mcp"]
-    
+
     - name: "youtube-mcp"
       purpose: "Video metadata and transcripts"
       status: "Use youtube-transcript-api wrapper"
-    
+
     - name: "document-parser-mcp"
       purpose: "PDF, DOCX parsing for RAG"
       options: ["unstructured-mcp", "apache-tika-mcp"]
-  
+
   storage:
     - name: "snowflake-mcp"
       purpose: "Primary data warehouse"
       features: ["streams", "dynamic tables", "stages"]
-    
+
     - name: "s3-mcp"
       purpose: "Document and media storage"
       features: ["presigned URLs", "lifecycle policies"]
-  
+
   processing:
     - name: "openflow-mcp"
       purpose: "Visual pipeline management"
       status: "Custom build required"
-    
+
     - name: "cortex-mcp"
       purpose: "Snowflake AI functions"
       status: "Integrate with snowflake-mcp"
@@ -260,20 +271,20 @@ web_project_mcp_stack:
   content:
     - name: "markdown-mcp"
       purpose: "Blog post management"
-    
+
     - name: "contentful-mcp"
       purpose: "Headless CMS"
       alternatives: ["strapi-mcp", "sanity-mcp"]
-  
+
   deployment:
     - name: "vercel-mcp"
       purpose: "Deployment and previews"
       alternatives: ["netlify-mcp", "cloudflare-pages-mcp"]
-  
+
   analytics:
     - name: "google-analytics-mcp"
       purpose: "Traffic analysis"
-    
+
     - name: "plausible-mcp"
       purpose: "Privacy-friendly analytics"
 ```
@@ -303,12 +314,12 @@ class MCPServerEvaluator:
             "integration": self._test_integration(server_name),
             "cost": self._calculate_cost(server_name)
         }
-        
+
         evaluation["score"] = self._calculate_weighted_score(evaluation)
         evaluation["recommendation"] = self._make_recommendation(evaluation)
-        
+
         return evaluation
-    
+
     def _check_functionality(self, server_name: str) -> dict:
         return {
             "covers_requirements": 0.85,  # % of requirements met
@@ -316,7 +327,7 @@ class MCPServerEvaluator:
             "missing_features": ["feature3"],
             "customization_needed": True
         }
-    
+
     def _make_recommendation(self, evaluation: dict) -> str:
         if evaluation["score"] > 0.9:
             return "USE_AS_IS"
@@ -341,21 +352,21 @@ import asyncio
 
 class BusinessLogicMCPServer(Server):
     """Template for exposing business logic to LLMs"""
-    
+
     def __init__(self, config: dict):
         super().__init__(
             name=f"{config['company']}-business-logic",
             version="1.0.0",
             description=f"Business logic for {config['company']}"
         )
-        
+
         self.config = config
         self._setup_database_connections()
         self._register_business_tools()
-    
+
     def _register_business_tools(self):
         """Register all business logic as tools"""
-        
+
         # Customer analytics
         self.add_tool(Tool(
             name="calculate_customer_metrics",
@@ -374,7 +385,7 @@ class BusinessLogicMCPServer(Server):
             },
             handler=self.calculate_customer_metrics
         ))
-        
+
         # Add more business-specific tools...
 ```
 
@@ -383,13 +394,13 @@ class BusinessLogicMCPServer(Server):
 # template: data-pipeline-mcp-server.py
 class DataPipelineMCPServer(Server):
     """Template for data pipeline operations"""
-    
+
     def __init__(self):
         super().__init__(
             name="data-pipeline-control",
             version="1.0.0"
         )
-        
+
         # Pipeline control tools
         self.add_tool(Tool(
             name="trigger_pipeline",
@@ -405,7 +416,7 @@ class DataPipelineMCPServer(Server):
             },
             handler=self.trigger_pipeline
         ))
-        
+
         # Monitoring tools
         self.add_tool(Tool(
             name="check_pipeline_status",
@@ -420,11 +431,11 @@ class DataPipelineMCPServer(Server):
 ```python
 class MCPOrchestrator:
     """Coordinate multiple MCP servers for complex workflows"""
-    
+
     def __init__(self):
         self.servers = {}
         self.load_balancer = LoadBalancer()
-        
+
     async def register_server(self, name: str, url: str, capabilities: List[str]):
         """Register an MCP server with the orchestrator"""
         self.servers[name] = {
@@ -433,17 +444,17 @@ class MCPOrchestrator:
             "health": await self.check_health(url),
             "load": 0
         }
-    
+
     async def route_request(self, tool_name: str, params: dict) -> Any:
         """Route request to appropriate server"""
         capable_servers = [
             name for name, info in self.servers.items()
             if tool_name in info["capabilities"]
         ]
-        
+
         if not capable_servers:
             raise ValueError(f"No server capable of handling {tool_name}")
-        
+
         # Load balance across capable servers
         selected_server = self.load_balancer.select(capable_servers)
         return await self.execute_on_server(selected_server, tool_name, params)
@@ -453,27 +464,27 @@ class MCPOrchestrator:
 ```python
 class SecureMCPGateway:
     """Security gateway for MCP servers"""
-    
+
     def __init__(self):
         self.auth_provider = OAuthProvider()
         self.rate_limiter = RateLimiter()
         self.audit_logger = AuditLogger()
-        
+
     async def handle_request(self, request: MCPRequest) -> MCPResponse:
         # Authentication
         if not await self.auth_provider.verify(request.auth_token):
             raise AuthenticationError()
-        
+
         # Rate limiting
         if not await self.rate_limiter.check(request.client_id):
             raise RateLimitError()
-        
+
         # Audit logging
         await self.audit_logger.log(request)
-        
+
         # Forward to actual server
         response = await self.forward_request(request)
-        
+
         # Sanitize response
         return self.sanitize_response(response)
 ```
@@ -513,21 +524,21 @@ class MonitoredMCPServer(Server):
         super().__init__()
         self.metrics = MetricsCollector()
         self.tracer = DistributedTracer()
-        
+
     async def execute_tool(self, tool_name: str, params: dict):
         with self.tracer.span(f"mcp.{tool_name}") as span:
             span.set_attribute("tool.name", tool_name)
             span.set_attribute("params.count", len(params))
-            
+
             try:
                 start_time = time.time()
                 result = await super().execute_tool(tool_name, params)
-                
+
                 # Record success metrics
                 self.metrics.record_success(tool_name, time.time() - start_time)
-                
+
                 return result
-                
+
             except Exception as e:
                 # Record failure metrics
                 self.metrics.record_failure(tool_name, str(e))
@@ -567,7 +578,7 @@ class CommunityMCPServer(Server):
     """
     Example of a well-documented, community-friendly MCP server
     """
-    
+
     def __init__(self):
         super().__init__(
             name="example-community-server",
@@ -576,7 +587,7 @@ class CommunityMCPServer(Server):
             repository="https://github.com/yourorg/mcp-example",
             documentation="https://docs.example.com/mcp"
         )
-        
+
     # Excellent documentation example
     async def example_tool(
         self,
@@ -585,21 +596,21 @@ class CommunityMCPServer(Server):
     ) -> Dict[str, Any]:
         """
         Execute an example operation.
-        
+
         Args:
             required_param: A required string parameter
             optional_param: An optional parameter with default
-            
+
         Returns:
             Dict containing:
                 - success: bool indicating success
                 - data: The processed result
                 - metadata: Additional information
-                
+
         Raises:
             ValueError: If required_param is empty
             ProcessingError: If operation fails
-            
+
         Example:
             >>> result = await server.example_tool("test")
             >>> print(result["data"])
