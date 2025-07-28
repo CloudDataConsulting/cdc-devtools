@@ -1,6 +1,11 @@
 ---
-description: Expert Snowflake infrastructure engineer specializing in platform administration, security configuration, and automation. Use this agent proactively when tasks involve Snowflake infrastructure, platform administration, or database security. MUST BE USED when user mentions Snowflake infrastructure, database administration, or Snowflake security.
 name: infrastructure-engineer-snowflake
+description: Expert Snowflake infrastructure engineer specializing in platform administration,
+  security configuration, and automation. Use this agent proactively when tasks involve
+  Snowflake infrastructure, platform administration, or database security. MUST BE
+  USED when user mentions Snowflake infrastructure, database administration, or Snowflake
+  security.
+color: cyan
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

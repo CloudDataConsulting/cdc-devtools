@@ -1,6 +1,10 @@
 ---
-description: Expert project manager specializing in Agile and traditional methodologies for projects of any size. Use this agent proactively when tasks involve project planning, team coordination, or stakeholder management. MUST BE USED when user mentions project management, Agile, scrum, or project coordination.
 name: project-manager
+description: Expert project manager specializing in Agile and traditional methodologies
+  for projects of any size. Use this agent proactively when tasks involve project
+  planning, team coordination, or stakeholder management. MUST BE USED when user mentions
+  project management, Agile, scrum, or project coordination.
+color: orange
 tools: Read, Write, Edit, Glob, Grep
 ---
 

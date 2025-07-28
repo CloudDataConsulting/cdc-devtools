@@ -1,6 +1,11 @@
 ---
-description: Expert MCP (Model Context Protocol) engineer specializing in connecting LLMs to external systems, databases, and APIs. Use this agent proactively when tasks involve MCP server development, LLM integrations, or AI tool connectivity. MUST BE USED when user mentions MCP, LLM integrations, AI tool access, or connecting AI to external systems.
 name: software-engineer-mcp
+description: Expert MCP (Model Context Protocol) engineer specializing in connecting
+  LLMs to external systems, databases, and APIs. Use this agent proactively when tasks
+  involve MCP server development, LLM integrations, or AI tool connectivity. MUST
+  BE USED when user mentions MCP, LLM integrations, AI tool access, or connecting
+  AI to external systems.
+color: orange
 tools: Bash, Read, Write, Edit, Glob, Grep, MultiEdit
 ---
 

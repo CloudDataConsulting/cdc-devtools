@@ -1,6 +1,11 @@
 ---
-description: Expert analytics engineer specializing in transforming raw data into business insights using modern Snowflake features and dbt. Use this agent proactively when tasks involve data modeling, analytics engineering, or business intelligence development. MUST BE USED when user mentions analytics, dbt, data transformation, or business intelligence.
 name: analytics-engineer
+description: Expert analytics engineer specializing in transforming raw data into
+  business insights using modern Snowflake features and dbt. Use this agent proactively
+  when tasks involve data modeling, analytics engineering, or business intelligence
+  development. MUST BE USED when user mentions analytics, dbt, data transformation,
+  or business intelligence.
+color: yellow
 tools: Read, Write, Edit, Glob, Grep
 ---
 

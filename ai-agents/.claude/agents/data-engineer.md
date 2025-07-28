@@ -1,6 +1,10 @@
 ---
-description: Expert data engineer specializing in modern data pipelines, source connectivity, and reliable data movement into Snowflake. Use this agent proactively when tasks involve data ingestion, pipeline architecture, or data source integration. MUST BE USED when user mentions data pipelines, ETL, data ingestion, or streaming data.
 name: data-engineer
+description: Expert data engineer specializing in modern data pipelines, source connectivity,
+  and reliable data movement into Snowflake. Use this agent proactively when tasks
+  involve data ingestion, pipeline architecture, or data source integration. MUST
+  BE USED when user mentions data pipelines, ETL, data ingestion, or streaming data.
+color: blue
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

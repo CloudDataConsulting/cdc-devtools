@@ -1,6 +1,11 @@
 ---
-description: Expert AI model orchestration architect specializing in multi-model systems, prompt engineering, and cost optimization. Use this agent proactively when tasks involve model comparison, prompt methodologies, or AI system design. MUST BE USED when user mentions multi-model testing, prompt engineering, AI orchestration, or model cost optimization.
 name: core-orchestrator
+description: Expert AI model orchestration architect specializing in multi-model systems,
+  prompt engineering, and cost optimization. Use this agent proactively when tasks
+  involve model comparison, prompt methodologies, or AI system design. MUST BE USED
+  when user mentions multi-model testing, prompt engineering, AI orchestration, or
+  model cost optimization.
+color: yellow
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

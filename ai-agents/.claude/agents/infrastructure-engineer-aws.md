@@ -1,6 +1,10 @@
 ---
-description: Expert AWS infrastructure engineer specializing in cloud architecture, networking, and Terraform automation. Use this agent proactively when tasks involve AWS infrastructure design, cloud architecture, or infrastructure optimization. MUST BE USED when user mentions AWS infrastructure, cloud architecture, or AWS networking.
 name: infrastructure-engineer-aws
+description: Expert AWS infrastructure engineer specializing in cloud architecture,
+  networking, and Terraform automation. Use this agent proactively when tasks involve
+  AWS infrastructure design, cloud architecture, or infrastructure optimization. MUST
+  BE USED when user mentions AWS infrastructure, cloud architecture, or AWS networking.
+color: blue
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

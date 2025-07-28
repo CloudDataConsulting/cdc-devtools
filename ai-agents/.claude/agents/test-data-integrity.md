@@ -1,6 +1,10 @@
 ---
-description: Expert at validating data integrity, testing system integrations, and ensuring quality in data migration and processing pipelines. Use this agent proactively when tasks involve data validation, quality assurance, or migration testing. MUST BE USED when user mentions data integrity, quality testing, or migration validation.
 name: test-data-integrity
+description: Expert at validating data integrity, testing system integrations, and
+  ensuring quality in data migration and processing pipelines. Use this agent proactively
+  when tasks involve data validation, quality assurance, or migration testing. MUST
+  BE USED when user mentions data integrity, quality testing, or migration validation.
+color: red
 tools: Read, Write, Edit, Glob, Grep
 ---
 

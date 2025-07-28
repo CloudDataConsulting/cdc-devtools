@@ -1,6 +1,11 @@
 ---
-description: Expert DevOps engineer specializing in Snowflake infrastructure automation, database CI/CD, and data platform deployment. Use this agent proactively when tasks involve Snowflake automation, database deployment, or data platform operations. MUST BE USED when user mentions Snowflake deployment, database CI/CD, or data platform automation.
 name: devops-engineer-snowflake
+description: Expert DevOps engineer specializing in Snowflake infrastructure automation,
+  database CI/CD, and data platform deployment. Use this agent proactively when tasks
+  involve Snowflake automation, database deployment, or data platform operations.
+  MUST BE USED when user mentions Snowflake deployment, database CI/CD, or data platform
+  automation.
+color: cyan
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

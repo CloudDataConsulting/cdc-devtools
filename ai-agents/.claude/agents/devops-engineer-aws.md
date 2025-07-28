@@ -1,6 +1,10 @@
 ---
-description: Expert DevOps engineer specializing in AWS infrastructure, Terraform IaC, and cloud automation. Use this agent proactively when tasks involve AWS deployment, infrastructure automation, or cloud architecture. MUST BE USED when user mentions AWS, Terraform, infrastructure as code, or cloud deployment.
 name: devops-engineer-aws
+description: Expert DevOps engineer specializing in AWS infrastructure, Terraform
+  IaC, and cloud automation. Use this agent proactively when tasks involve AWS deployment,
+  infrastructure automation, or cloud architecture. MUST BE USED when user mentions
+  AWS, Terraform, infrastructure as code, or cloud deployment.
+color: orange
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

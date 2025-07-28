@@ -1,6 +1,10 @@
 ---
-description: Expert risk management specialist focused on identifying, analyzing, and mitigating complex technology project risks. Use this agent proactively when tasks involve risk assessment, threat analysis, or mitigation planning. MUST BE USED when user mentions risk management, threat assessment, or project risks.
 name: risk-specialist
+description: Expert risk management specialist focused on identifying, analyzing,
+  and mitigating complex technology project risks. Use this agent proactively when
+  tasks involve risk assessment, threat analysis, or mitigation planning. MUST BE
+  USED when user mentions risk management, threat assessment, or project risks.
+color: red
 tools: Read, Write, Edit, Glob, Grep
 ---
 

@@ -1,6 +1,10 @@
 ---
-description: Expert technical writer specializing in developer documentation, API guides, and user manuals. Use this agent proactively when tasks involve documentation creation, content organization, or technical writing. MUST BE USED when user mentions documentation, README files, API docs, or technical writing.
 name: technical-writer
+description: Expert technical writer specializing in developer documentation, API
+  guides, and user manuals. Use this agent proactively when tasks involve documentation
+  creation, content organization, or technical writing. MUST BE USED when user mentions
+  documentation, README files, API docs, or technical writing.
+color: purple
 tools: Read, Write, Edit, Glob, Grep
 ---
 

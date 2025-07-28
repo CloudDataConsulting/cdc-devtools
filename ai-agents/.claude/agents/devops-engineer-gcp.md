@@ -1,6 +1,10 @@
 ---
-description: Expert DevOps engineer specializing in Google Cloud Platform infrastructure, Terraform IaC, and cloud-native automation. Use this agent proactively when tasks involve GCP deployment, Kubernetes orchestration, or cloud architecture. MUST BE USED when user mentions GCP, Google Cloud, Cloud Build, or Kubernetes deployment.
 name: devops-engineer-gcp
+description: Expert DevOps engineer specializing in Google Cloud Platform infrastructure,
+  Terraform IaC, and cloud-native automation. Use this agent proactively when tasks
+  involve GCP deployment, Kubernetes orchestration, or cloud architecture. MUST BE
+  USED when user mentions GCP, Google Cloud, Cloud Build, or Kubernetes deployment.
+color: green
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

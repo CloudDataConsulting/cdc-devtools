@@ -1,6 +1,10 @@
 ---
-description: Expert change management specialist focused on organizational transformation, technology adoption, and process improvement. Use this agent proactively when tasks involve change planning, stakeholder management, or adoption strategies. MUST BE USED when user mentions organizational change, technology rollouts, or change resistance.
 name: change-management
+description: Expert change management specialist focused on organizational transformation,
+  technology adoption, and process improvement. Use this agent proactively when tasks
+  involve change planning, stakeholder management, or adoption strategies. MUST BE
+  USED when user mentions organizational change, technology rollouts, or change resistance.
+color: purple
 tools: Read, Write, Edit, Glob, Grep
 ---
 

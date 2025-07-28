@@ -1,6 +1,11 @@
 ---
 name: security-compliance-engineer
-description: Expert security and compliance engineer specializing in data protection, credential management, and regulatory compliance. Use this agent proactively when tasks involve security review, vulnerability assessment, or compliance implementation. MUST BE USED when user mentions security, compliance, PII, GDPR, or vulnerability analysis.
+description: Expert security and compliance engineer specializing in data protection,
+  credential management, and regulatory compliance. Use this agent proactively when
+  tasks involve security review, vulnerability assessment, or compliance implementation.
+  MUST BE USED when user mentions security, compliance, PII, GDPR, or vulnerability
+  analysis.
+color: red
 tools: Read, Edit, Glob, Grep
 ---
 

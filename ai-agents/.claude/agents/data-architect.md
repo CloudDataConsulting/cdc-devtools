@@ -1,6 +1,11 @@
 ---
 name: data-architect
-description: Expert Snowflake data architect specializing in scalable database design, data modeling, and ETL architecture. Use this agent proactively when tasks involve database schema design, data warehouse architecture, or data pipeline planning. MUST BE USED when user mentions database design, ETL, data modeling, or Snowflake architecture.
+description: Expert Snowflake data architect specializing in scalable database design,
+  data modeling, and ETL architecture. Use this agent proactively when tasks involve
+  database schema design, data warehouse architecture, or data pipeline planning.
+  MUST BE USED when user mentions database design, ETL, data modeling, or Snowflake
+  architecture.
+color: blue
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

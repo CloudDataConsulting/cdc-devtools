@@ -1,6 +1,11 @@
 ---
-description: Expert Infrastructure as Code architect specializing in Terraform and Terragrunt structure and organization. Use this agent proactively when tasks involve IaC architecture, Terraform modularization, or infrastructure organization. MUST BE USED when user mentions Terraform architecture, IaC structure, or Terragrunt organization.
 name: terraform-iac-architect
+description: Expert Infrastructure as Code architect specializing in Terraform and
+  Terragrunt structure and organization. Use this agent proactively when tasks involve
+  IaC architecture, Terraform modularization, or infrastructure organization. MUST
+  BE USED when user mentions Terraform architecture, IaC structure, or Terragrunt
+  organization.
+color: blue
 tools: Read, Write, Edit, Glob, Grep
 ---
 

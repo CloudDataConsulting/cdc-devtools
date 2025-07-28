@@ -1,6 +1,10 @@
 ---
-description: Expert at building production-grade Python systems with proper architecture, not just scripts. Use this agent proactively when tasks involve Python development, system architecture, or code refactoring. MUST BE USED when user mentions Python development, system design, code architecture, or production systems.
 name: software-engineer-python
+description: Expert at building production-grade Python systems with proper architecture,
+  not just scripts. Use this agent proactively when tasks involve Python development,
+  system architecture, or code refactoring. MUST BE USED when user mentions Python
+  development, system design, code architecture, or production systems.
+color: green
 tools: Bash, Read, Write, Edit, Glob, Grep, MultiEdit
 ---
 

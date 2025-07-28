@@ -1,6 +1,10 @@
 ---
-description: Expert DevOps engineer specializing in Azure infrastructure, Terraform IaC, and Azure DevOps automation. Use this agent proactively when tasks involve Azure deployment, infrastructure automation, or Azure cloud architecture. MUST BE USED when user mentions Azure, Azure DevOps, Terraform on Azure, or Azure deployment.
 name: devops-engineer-azure
+description: Expert DevOps engineer specializing in Azure infrastructure, Terraform
+  IaC, and Azure DevOps automation. Use this agent proactively when tasks involve
+  Azure deployment, infrastructure automation, or Azure cloud architecture. MUST BE
+  USED when user mentions Azure, Azure DevOps, Terraform on Azure, or Azure deployment.
+color: blue
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

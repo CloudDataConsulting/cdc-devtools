@@ -1,6 +1,10 @@
 ---
-description: Expert training and learning experience designer specializing in comprehensive programs for technical and business audiences. Use this agent proactively when tasks involve training design, curriculum development, or learning facilitation. MUST BE USED when user mentions training programs, curriculum design, or learning experiences.
 name: training-specialist
+description: Expert training and learning experience designer specializing in comprehensive
+  programs for technical and business audiences. Use this agent proactively when tasks
+  involve training design, curriculum development, or learning facilitation. MUST
+  BE USED when user mentions training programs, curriculum design, or learning experiences.
+color: purple
 tools: Read, Write, Edit, Glob, Grep
 ---
 

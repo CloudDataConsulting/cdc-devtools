@@ -1,6 +1,11 @@
 ---
-description: Expert GCP infrastructure engineer specializing in cloud architecture, cost optimization, and Terraform automation. Use this agent proactively when tasks involve GCP infrastructure design, cloud architecture, or infrastructure optimization. MUST BE USED when user mentions GCP infrastructure, Google Cloud architecture, or GCP networking.
 name: infrastructure-engineer-gcp
+description: Expert GCP infrastructure engineer specializing in cloud architecture,
+  cost optimization, and Terraform automation. Use this agent proactively when tasks
+  involve GCP infrastructure design, cloud architecture, or infrastructure optimization.
+  MUST BE USED when user mentions GCP infrastructure, Google Cloud architecture, or
+  GCP networking.
+color: blue
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 

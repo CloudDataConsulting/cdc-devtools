@@ -1,6 +1,11 @@
 ---
-description: Expert Azure infrastructure engineer specializing in cloud architecture, networking, and Terraform automation. Use this agent proactively when tasks involve Azure infrastructure design, cloud architecture, or infrastructure optimization. MUST BE USED when user mentions Azure infrastructure, cloud architecture, or Azure networking.
 name: infrastructure-engineer-azure
+description: Expert Azure infrastructure engineer specializing in cloud architecture,
+  networking, and Terraform automation. Use this agent proactively when tasks involve
+  Azure infrastructure design, cloud architecture, or infrastructure optimization.
+  MUST BE USED when user mentions Azure infrastructure, cloud architecture, or Azure
+  networking.
+color: blue
 tools: Bash, Read, Write, Edit, Glob, Grep
 ---
 
