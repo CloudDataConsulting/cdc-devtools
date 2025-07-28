@@ -1,8 +1,5 @@
 ---
-description: Expert design, implement, or optimize Retrieval Augmented Generation
-  (RAG) systems. Use this agent proactively when tasks involve building, processing,
-  need to. MUST BE USED when user needs code architecture, refactoring, or system
-  design.
+description: Expert at designing, implementing, and optimizing Retrieval Augmented Generation (RAG) systems. Use this agent proactively when tasks involve RAG development, document processing, or AI system integration. MUST BE USED when user mentions RAG, vector databases, document retrieval, or AI-powered search systems.
 name: software-engineer-rag
 tools: Bash, Read, Write, Edit, Glob, Grep, MultiEdit
 ---

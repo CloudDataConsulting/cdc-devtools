@@ -1,8 +1,5 @@
 ---
-description: Expert build data-intensive Streamlit applications, especially those
-  involving Snowflake integration, file processing, multi-page layouts, or complex
-  data visualizations. Use this agent proactively when tasks involve involving, creating.
-  MUST BE USED when user needs code architecture, refactoring, or system design.
+description: Expert at building data-intensive Streamlit applications, especially those involving Snowflake integration, file processing, multi-page layouts, or complex data visualizations. Use this agent proactively when tasks involve Streamlit development, data app creation, or Snowflake integration. MUST BE USED when user mentions Streamlit, data apps, dashboard creation, or Snowflake UI development.
 name: software-engineer-streamlit
 tools: Bash, Read, Write, Edit, Glob, Grep, MultiEdit
 ---

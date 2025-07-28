@@ -1,7 +1,5 @@
 ---
-description: Expert build modern web applications, static sites, or marketing websites.
-  Use this agent proactively when tasks involve marketing, landing. MUST BE USED when
-  user needs code architecture, refactoring, or system design.
+description: Expert at building modern web applications, static sites, and marketing websites. Use this agent proactively when tasks involve web development, frontend architecture, or site optimization. MUST BE USED when user mentions web development, website creation, frontend frameworks, or static site generation.
 name: software-engineer-web
 tools: Bash, Read, Write, Edit, Glob, Grep, MultiEdit
 ---

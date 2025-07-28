@@ -1,7 +1,5 @@
 ---
-description: Expert build production-grade Python systems with proper architecture,
-  not just scripts. Use this agent proactively when tasks involve creating, implementing.
-  MUST BE USED when user needs code architecture, refactoring, or system design.
+description: Expert at building production-grade Python systems with proper architecture, not just scripts. Use this agent proactively when tasks involve Python development, system architecture, or code refactoring. MUST BE USED when user mentions Python development, system design, code architecture, or production systems.
 name: software-engineer-python
 tools: Bash, Read, Write, Edit, Glob, Grep, MultiEdit
 ---
