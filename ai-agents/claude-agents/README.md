@@ -94,7 +94,7 @@ ln -s ~/repos/cdc/cdc-devtools/ai-agents/claude-agents ~/.claude/agents
 ls ~/.claude/agents/
 
 # View a specific agent
-cat ~/.claude/agents/data-snowflake-architect-pro.md
+cat ~/.claude/agents/data-architect.md
 
 # Copy into Claude.ai and use
 ```
@@ -104,8 +104,8 @@ cat ~/.claude/agents/data-snowflake-architect-pro.md
 1. Project has its own orchestrator in `.claude/orchestrator.md`
 2. Orchestrator understands the request
 3. Orchestrator delegates to specialists:
-   - "Use data-snowflake-architect-pro.md for schema design"
-   - "Use code-reviewer.md for code review"
+   - "Use data-architect.md for schema design"
+   - "Use software-engineer-python.md for implementation"
 4. Orchestrator synthesizes results for project context
 ```
 
@@ -115,20 +115,37 @@ All agents follow the naming convention `[category]-[role].md`:
 
 ```
 ~/.claude/agents/
-├── code-reviewer.md              # Code quality
-├── code-systems-engineer.md      # System design
-├── code-streamlit-builder.md     # Streamlit apps
-├── data-snowflake-architect-pro.md
-├── data-snowflake-data-architect.md
-├── data-snowflake-rag-architect.md
-├── devops-aws-snowflake-devops.md
-├── devops-cloud-storage-optimizer.md
-├── doc-technical-writer.md
-├── security-compliance-engineer.md
-├── test-data-integrity.md
-└── _templates/                   # Templates for new agents
-    ├── basic-agent.md
-    └── project-orchestrator.md
+├── analytics-engineer.md         # Analytics and dimensional modeling
+├── change-management.md          # Database change management
+├── core-orchestrator.md          # Multi-domain project coordination
+├── crypto-coin-analyzer.md       # Cryptocurrency analysis
+├── crypto-market-analyst.md      # Crypto market analysis
+├── data-architect.md             # Data architecture and modeling
+├── data-engineer.md              # Data pipeline development
+├── devops-engineer-aws.md        # AWS DevOps automation
+├── devops-engineer-azure.md      # Azure DevOps automation
+├── devops-engineer-gcp.md        # GCP DevOps automation
+├── devops-engineer-snowflake.md  # Snowflake DevOps automation
+├── hello-world-agent.md          # Simple greeting agent
+├── infrastructure-engineer-aws.md     # AWS infrastructure
+├── infrastructure-engineer-azure.md   # Azure infrastructure
+├── infrastructure-engineer-gcp.md     # GCP infrastructure
+├── infrastructure-engineer-snowflake.md # Snowflake infrastructure
+├── meta-agent.md                 # Agent creation and optimization
+├── project-manager.md            # Project planning and management
+├── proposal-writer.md            # Business proposals and RFPs
+├── risk-specialist.md            # Risk assessment and mitigation
+├── security-compliance-engineer.md    # Security and compliance
+├── software-engineer-mcp.md      # MCP server development
+├── software-engineer-python.md   # Python system architecture
+├── software-engineer-rag.md      # RAG system development
+├── software-engineer-streamlit.md     # Streamlit applications
+├── software-engineer-web.md      # Web development
+├── tdd-python-expert.md          # Test-driven Python development
+├── technical-writer.md           # Technical documentation
+├── terraform-iac-architect.md    # Terraform and IaC design
+├── test-data-integrity.md        # Data quality testing
+└── training-specialist.md        # Training material development
 ```
 
 ## Categories
@@ -185,19 +202,19 @@ git push
 ```markdown
 Task: Design and implement user analytics system
 
-1. data-snowflake-architect-pro.md:
+1. data-architect.md:
    - Design analytics schema
    - Optimize for query patterns
 
-2. code-systems-engineer.md:
-   - Build data ingestion service
-   - Create API endpoints
+2. data-engineer.md:
+   - Build data ingestion pipelines
+   - Create ELT processes
 
 3. test-data-integrity.md:
    - Validate data quality
    - Create test scenarios
 
-4. doc-technical-writer.md:
+4. technical-writer.md:
    - Document the system
    - Create user guides
 ```
