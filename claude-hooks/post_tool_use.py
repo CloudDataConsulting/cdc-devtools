@@ -13,8 +13,10 @@ def main():
         # Read JSON input from stdin
         input_data = json.load(sys.stdin)
         
-        # Ensure log directory exists
-        log_dir = Path.cwd() / 'logs'
+        # Ensure log directory exists in project root
+        # Get the current working directory from input_data (project root)
+        project_root = Path(input_data.get("cwd", Path.cwd()))
+        log_dir = project_root / 'ai-logs'
         log_dir.mkdir(parents=True, exist_ok=True)
         log_path = log_dir / 'post_tool_use.json'
         

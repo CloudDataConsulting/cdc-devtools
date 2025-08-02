@@ -164,9 +164,11 @@ def main():
         # Read JSON input from stdin
         input_data = json.loads(sys.stdin.read())
         
-        # Ensure log directory exists
+        # Ensure log directory exists in project root
         import os
-        log_dir = os.path.join(os.getcwd(), 'logs')
+        # Get the current working directory from input_data (project root)
+        project_root = input_data.get("cwd", os.getcwd())
+        log_dir = os.path.join(project_root, "ai-logs")
         os.makedirs(log_dir, exist_ok=True)
         log_file = os.path.join(log_dir, 'notification.json')
         

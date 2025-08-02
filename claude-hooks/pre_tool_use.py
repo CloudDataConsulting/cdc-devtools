@@ -104,8 +104,23 @@ def main():
                 print("BLOCKED: Dangerous rm command detected and prevented", file=sys.stderr)
                 sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
         
-        # Ensure log directory exists
-        log_dir = Path.cwd() / 'logs'
+        # Ensure log directory exists in project root
+        # Get the current working directory from input_data (project root)
+        cwd = input_data.get("cwd")
+        if cwd:
+            project_root = Path(cwd)
+        else:
+            # Fallback: find project root by looking for .git or go up to parent
+            current = Path.cwd()
+            while current != current.parent:
+                if (current / '.git').exists() or (current / '.claude').exists():
+                    project_root = current
+                    break
+                current = current.parent
+            else:
+                project_root = Path.cwd().parent  # Go one level up from hooks dir
+        
+        log_dir = project_root / 'ai-logs'
         log_dir.mkdir(parents=True, exist_ok=True)
         log_path = log_dir / 'pre_tool_use.json'
         

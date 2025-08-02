@@ -166,8 +166,10 @@ def main():
         session_id = input_data.get("session_id", "")
         stop_hook_active = input_data.get("stop_hook_active", False)
 
-        # Ensure log directory exists
-        log_dir = os.path.join(os.getcwd(), "logs")
+        # Ensure log directory exists in project root
+        # Get the current working directory from input_data (project root)
+        project_root = input_data.get("cwd", os.getcwd())
+        log_dir = os.path.join(project_root, "ai-logs")
         os.makedirs(log_dir, exist_ok=True)
         log_path = os.path.join(log_dir, "subagent_stop.json")
 

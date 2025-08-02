@@ -52,6 +52,7 @@ yarn-error.log*
 
 # Logs
 logs/
+ai-logs/
 *.log
 
 # IDE
