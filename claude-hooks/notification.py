@@ -12,6 +12,7 @@ import os
 import sys
 import subprocess
 import random
+import time
 from pathlib import Path
 
 try:
@@ -50,9 +51,46 @@ def get_tts_script_path():
     return None
 
 
-def announce_notification():
+def extract_project_name(cwd):
+    """Extract project name from the current working directory path."""
+    if not cwd:
+        return None
+    
+    # Get the last directory name from the path
+    path_parts = cwd.rstrip('/').split('/')
+    if path_parts:
+        project_name = path_parts[-1]
+        # Clean up common prefixes/suffixes
+        if project_name.startswith('.'):
+            return None  # Hidden directories
+        
+        # Remove 'cdc-' prefix for cleaner TTS
+        if project_name.lower().startswith('cdc-'):
+            project_name = project_name[4:]
+        
+        # Convert hyphens to spaces and title case for better speech
+        project_name = project_name.replace('-', ' ').title()
+        
+        return project_name
+    return None
+
+
+def announce_notification(project_name=None, session_id=None):
     """Announce that the agent needs user input."""
     try:
+        # Check for recent announcements to prevent duplicates
+        if session_id:
+            last_announce_file = Path("/tmp") / f".claude_notify_announce_{session_id}"
+            
+            # Check if we've announced recently (within 5 seconds)
+            if last_announce_file.exists():
+                last_time = last_announce_file.stat().st_mtime
+                if time.time() - last_time < 5:
+                    return  # Skip duplicate announcement
+            
+            # Update timestamp
+            last_announce_file.touch()
+        
         tts_script = get_tts_script_path()
         if not tts_script:
             return  # No TTS scripts available
@@ -60,11 +98,45 @@ def announce_notification():
         # Get engineer name if available
         engineer_name = os.getenv('ENGINEER_NAME', '').strip()
         
-        # Create notification message with 30% chance to include name
-        if engineer_name and random.random() < 0.3:
-            notification_message = f"{engineer_name}, your agent needs your input"
+        # Create notification message with variations
+        messages = []
+        base_messages = [
+            "Your agent needs your input",
+            "Agent is waiting for your response",
+            "Ready for your next instruction"
+        ]
+        
+        # Add project-specific variations if project name is available
+        if project_name:
+            messages.extend([
+                f"Your {project_name} agent needs input",
+                f"Agent working on {project_name} needs your response",
+                f"{project_name} is waiting for your instruction"
+            ])
+        
+        # Add personalized variations if engineer name is available
+        if engineer_name:
+            if project_name:
+                messages.extend([
+                    f"{engineer_name}, your {project_name} agent needs input",
+                    f"{engineer_name}, {project_name} is ready for your next step"
+                ])
+            else:
+                messages.extend([
+                    f"{engineer_name}, your agent needs your input",
+                    f"{engineer_name}, agent is waiting for you"
+                ])
+        
+        # If we have both basic and enhanced messages, prefer enhanced ones
+        if len(messages) > len(base_messages):
+            # 70% chance to use enhanced messages
+            if random.random() < 0.7:
+                notification_message = random.choice(messages[len(base_messages):])
+            else:
+                notification_message = random.choice(messages[:len(base_messages)])
         else:
-            notification_message = "Your agent needs your input"
+            # Fall back to basic messages
+            notification_message = random.choice(base_messages if messages else ["Your agent needs your input"])
         
         # Call the TTS script with the notification message
         subprocess.run([
@@ -115,10 +187,15 @@ def main():
         with open(log_file, 'w') as f:
             json.dump(log_data, f, indent=2)
         
+        # Extract project name from cwd and session_id
+        cwd = input_data.get("cwd", "")
+        project_name = extract_project_name(cwd)
+        session_id = input_data.get("session_id", "")
+        
         # Announce notification via TTS only if --notify flag is set
         # Skip TTS for the generic "Claude is waiting for your input" message
         if args.notify and input_data.get('message') != 'Claude is waiting for your input':
-            announce_notification()
+            announce_notification(project_name, session_id)
         
         sys.exit(0)
         

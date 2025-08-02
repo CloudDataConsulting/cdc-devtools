@@ -12,6 +12,7 @@ import os
 import sys
 import random
 import subprocess
+import time
 from pathlib import Path
 from datetime import datetime
 
@@ -22,15 +23,52 @@ except ImportError:
     pass  # dotenv is optional
 
 
-def get_completion_messages():
-    """Return list of friendly completion messages."""
-    return [
-        "Work complete!",
-        "All done!",
-        "Task finished!",
-        "Job complete!",
-        "Ready for next task!"
-    ]
+def get_completion_messages(project_name=None):
+    """Return list of friendly completion messages, optionally project-specific."""
+    if project_name:
+        return [
+            f"Work complete on {project_name}!",
+            f"All done with {project_name}!",
+            f"{project_name} task finished!",
+            f"{project_name} updates complete!",
+            f"Ready for the next {project_name} task!",
+            f"Successfully finished working on {project_name}!",
+            f"{project_name} is looking great!",
+            f"Another successful session on {project_name}!"
+        ]
+    else:
+        # Fallback to generic messages
+        return [
+            "Work complete!",
+            "All done!",
+            "Task finished!",
+            "Job complete!",
+            "Ready for next task!"
+        ]
+
+
+def extract_project_name(cwd):
+    """Extract project name from the current working directory path."""
+    if not cwd:
+        return None
+    
+    # Get the last directory name from the path
+    path_parts = cwd.rstrip('/').split('/')
+    if path_parts:
+        project_name = path_parts[-1]
+        # Clean up common prefixes/suffixes
+        if project_name.startswith('.'):
+            return None  # Hidden directories
+        
+        # Remove 'cdc-' prefix for cleaner TTS
+        if project_name.lower().startswith('cdc-'):
+            project_name = project_name[4:]
+        
+        # Convert hyphens to spaces and title case for better speech
+        project_name = project_name.replace('-', ' ').title()
+        
+        return project_name
+    return None
 
 
 def get_tts_script_path():
@@ -62,11 +100,14 @@ def get_tts_script_path():
     return None
 
 
-def get_llm_completion_message():
+def get_llm_completion_message(project_name=None):
     """
     Generate completion message using available LLM services.
     Priority order: OpenAI > Anthropic > fallback to random message
     
+    Args:
+        project_name: Optional project name to include in the message
+        
     Returns:
         str: Generated or fallback completion message
     """
@@ -109,18 +150,31 @@ def get_llm_completion_message():
                 pass
     
     # Fallback to random predefined message
-    messages = get_completion_messages()
+    messages = get_completion_messages(project_name)
     return random.choice(messages)
 
-def announce_completion():
+def announce_completion(project_name=None, session_id=None):
     """Announce completion using the best available TTS service."""
     try:
+        # Check for recent announcements to prevent duplicates
+        if session_id:
+            last_announce_file = Path("/tmp") / f".claude_last_announce_{session_id}"
+            
+            # Check if we've announced recently (within 5 seconds)
+            if last_announce_file.exists():
+                last_time = last_announce_file.stat().st_mtime
+                if time.time() - last_time < 5:
+                    return  # Skip duplicate announcement
+            
+            # Update timestamp
+            last_announce_file.touch()
+        
         tts_script = get_tts_script_path()
         if not tts_script:
             return  # No TTS scripts available
         
         # Get completion message (LLM-generated or fallback)
-        completion_message = get_llm_completion_message()
+        completion_message = get_llm_completion_message(project_name)
         
         # Call the TTS script with the completion message
         subprocess.run([
@@ -197,8 +251,12 @@ def main():
                 except Exception:
                     pass  # Fail silently
 
+        # Extract project name from cwd
+        cwd = input_data.get("cwd", "")
+        project_name = extract_project_name(cwd)
+        
         # Announce completion via TTS
-        announce_completion()
+        announce_completion(project_name, session_id)
 
         sys.exit(0)
 

@@ -11,6 +11,8 @@ import json
 import os
 import sys
 import subprocess
+import random
+import time
 from pathlib import Path
 from datetime import datetime
 
@@ -19,6 +21,66 @@ try:
     load_dotenv()
 except ImportError:
     pass  # dotenv is optional
+
+
+def get_subagent_completion_messages(project_name=None, agent_type=None):
+    """Return list of friendly subagent completion messages."""
+    if project_name and agent_type:
+        return [
+            f"{agent_type} agent finished working on {project_name}!",
+            f"{project_name}: {agent_type} agent task complete!",
+            f"{agent_type} agent done with {project_name} updates!",
+            f"Successfully completed {agent_type} tasks for {project_name}!",
+            f"{project_name} looking good thanks to {agent_type} agent!"
+        ]
+    elif agent_type:
+        return [
+            f"{agent_type} agent task complete!",
+            f"{agent_type} agent finished!",
+            f"{agent_type} agent work done!",
+            f"{agent_type} agent ready!",
+            f"{agent_type} agent task accomplished!"
+        ]
+    elif project_name:
+        return [
+            f"Subagent task complete on {project_name}!",
+            f"Subagent finished with {project_name}!",
+            f"{project_name} subagent work done!",
+            f"Subagent ready for more {project_name} tasks!",
+            f"{project_name} subagent task accomplished!"
+        ]
+    else:
+        return [
+            "Subagent task complete!",
+            "Subagent finished!",
+            "Subagent work done!",
+            "Subagent ready!",
+            "Subagent task accomplished!"
+        ]
+
+
+def extract_project_name(cwd):
+    """Extract project name from the current working directory path."""
+    if not cwd:
+        return None
+    
+    # Get the last directory name from the path
+    path_parts = cwd.rstrip('/').split('/')
+    if path_parts:
+        project_name = path_parts[-1]
+        # Clean up common prefixes/suffixes
+        if project_name.startswith('.'):
+            return None  # Hidden directories
+        
+        # Remove 'cdc-' prefix for cleaner TTS
+        if project_name.lower().startswith('cdc-'):
+            project_name = project_name[4:]
+        
+        # Convert hyphens to spaces and title case for better speech
+        project_name = project_name.replace('-', ' ').title()
+        
+        return project_name
+    return None
 
 
 def get_tts_script_path():
@@ -50,15 +112,29 @@ def get_tts_script_path():
     return None
 
 
-def announce_subagent_completion():
+def announce_subagent_completion(project_name=None, agent_type=None, session_id=None):
     """Announce subagent completion using the best available TTS service."""
     try:
+        # Check for recent announcements to prevent duplicates
+        if session_id:
+            last_announce_file = Path("/tmp") / f".claude_subagent_announce_{session_id}"
+            
+            # Check if we've announced recently (within 5 seconds)
+            if last_announce_file.exists():
+                last_time = last_announce_file.stat().st_mtime
+                if time.time() - last_time < 5:
+                    return  # Skip duplicate announcement
+            
+            # Update timestamp
+            last_announce_file.touch()
+        
         tts_script = get_tts_script_path()
         if not tts_script:
             return  # No TTS scripts available
         
-        # Use fixed message for subagent completion
-        completion_message = "Subagent Complete"
+        # Get random completion message
+        messages = get_subagent_completion_messages(project_name, agent_type)
+        completion_message = random.choice(messages)
         
         # Call the TTS script with the completion message
         subprocess.run([
@@ -135,8 +211,13 @@ def main():
                 except Exception:
                     pass  # Fail silently
 
+        # Extract project name and agent type
+        cwd = input_data.get("cwd", "")
+        project_name = extract_project_name(cwd)
+        agent_type = input_data.get("subagent_type", None)
+        
         # Announce subagent completion via TTS
-        announce_subagent_completion()
+        announce_subagent_completion(project_name, agent_type, session_id)
 
         sys.exit(0)
 
