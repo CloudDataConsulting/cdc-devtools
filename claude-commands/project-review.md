@@ -27,6 +27,7 @@ Utilize specialized agents based on project characteristics:
 - **Codebase Structure**: Architecture patterns, module organization
 - **Dependencies**: External libraries, internal dependencies, version management
 - **Configuration**: Environment management, settings, secrets handling
+- **Configuration Strategy Assessment**: Modern config.yaml vs legacy env.sh patterns
 - **Testing**: Coverage, quality, automation level
 
 ### 2. Maturity Assessment
@@ -47,6 +48,12 @@ Utilize specialized agents based on project characteristics:
 - **Maintainability**: Code organization, separation of concerns
 - **Integration Points**: API design, data flow, external dependencies
 
+### 5. Configuration Strategy Compliance
+- **Secrets Management**: config.yaml with 1Password vault references vs legacy env.sh
+- **Environment Variables**: Appropriate use for non-sensitive configuration only
+- **Migration Requirements**: Projects needing conversion to modern config patterns
+- **1Password Integration**: Vault naming conventions and item reference standards
+
 ## Deliverable Requirements
 
 ### Project Status Report Structure
@@ -63,6 +70,12 @@ Utilize specialized agents based on project characteristics:
 - Code quality metrics
 - Performance characteristics
 - Security posture
+
+## Configuration Strategy Review
+- Current secrets management approach (config.yaml vs env.sh)
+- 1Password integration compliance
+- Required migration tasks for legacy configuration patterns
+- Environment variable usage assessment
 
 ## Maturity Analysis
 - Development practices
@@ -86,3 +99,26 @@ Utilize specialized agents based on project characteristics:
 - Realistic timeline for improvements
 - Specific technical metrics and targets
 - Clear risk assessment and mitigation strategies
+- Configuration strategy compliance assessment and migration plan
+
+## Configuration Assessment Guidelines
+
+### Modern Configuration Standards (Target State)
+- **config.yaml**: Project-specific secrets, API keys, database credentials
+  - 1Password vault references: `vault: "CDC_project_name"` and `item: "service-name"`
+  - Clear separation of environments (dev/staging/prod)
+- **env.sh**: Non-sensitive environment variables only
+  - Project paths, feature flags, debug settings
+  - Public configuration values
+
+### Legacy Patterns to Identify
+- Secrets hardcoded in env.sh files
+- 1Password CLI calls embedded in environment scripts
+- Missing config.yaml files in projects with secrets
+- Direct credential storage in any configuration files
+
+### Migration Priority Assessment
+- **Critical**: Projects with exposed secrets in version control
+- **High**: Production projects using legacy env.sh for secrets
+- **Medium**: Development projects needing standardization
+- **Low**: Projects with minimal secret requirements
