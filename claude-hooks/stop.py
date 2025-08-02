@@ -67,6 +67,24 @@ def extract_project_name(cwd):
         # Convert hyphens to spaces and title case for better speech
         project_name = project_name.replace('-', ' ').title()
         
+        # Apply pronunciation fixes for TTS
+        pronunciation_map = {
+            'Ai': 'A I',  # So "AI" gets pronounced as "A I" instead of "ah"
+            'Api': 'A P I',  # API -> "A P I"
+            'Ui': 'U I',  # UI -> "U I" 
+            'Ml': 'M L',  # ML -> "M L"
+            'Nlp': 'N L P',  # NLP -> "N L P"
+            'Sql': 'S Q L',  # SQL -> "S Q L"
+            'Etl': 'E T L',  # ETL -> "E T L"
+            'Aws': 'A W S',  # AWS -> "A W S"
+            'Gcp': 'G C P',  # GCP -> "G C P"
+            'Iot': 'I O T',  # IoT -> "I O T"
+        }
+        
+        # Apply pronunciation mappings
+        for word, pronunciation in pronunciation_map.items():
+            project_name = project_name.replace(word, pronunciation)
+        
         return project_name
     return None
 
